@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.11.9">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Experiment 01: The Leaning Tower of Pisa – In Silico Physics Lab</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/scrollable-regions/scrollable-regions.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-63b5708e65d6cd79cd7618c58d0c21e7.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c790ccd3bda76d2f420cf59c327148a9.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-contrib/live-runtime/live-runtime.js" type="module"></script>
+<link href="../site_libs/quarto-contrib/live-runtime/live-runtime.css" rel="stylesheet">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+<script type="module" src="../site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="../site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light"><a id="quarto-skip-link" class="visually-hidden-focusable" href="#quarto-document-content">Skip to main content</a>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark" aria-label="Site">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a href="../index.html" class="navbar-brand navbar-brand-logo">
+    <img src="../assets/logo.png" alt="" class="navbar-logo light-content">
+    <img src="../assets/logo.png" alt="" class="navbar-logo dark-content">
+    </a>
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">In Silico Physics Lab</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="../experiments/01-leaning-tower-of-pisa.html" aria-current="page"> 
+<span class="menu-text">Experiments</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/simphyslab/simphyslab.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub Repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+            <div id="quarto-search" class="" title="Search"></div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav" aria-label="Toolbar">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../experiments/01-leaning-tower-of-pisa.html">Classical Mechanics</a></li><li class="breadcrumb-item"><a href="../experiments/01-leaning-tower-of-pisa.html">01. Leaning Tower of Pisa</a></li></ol></nav>
+        <a class="flex-grow-1" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto" aria-label="Section">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <button type="button" class="sidebar-item-text sidebar-item-toggle sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-controls="quarto-sidebar-section-1" aria-expanded="true">
+ <span class="menu-text" id="quarto-sidebar-section-1-label">Classical Mechanics</span><i class="bi bi-chevron-right" aria-hidden="true"></i></button>
+      </div>
+      <ul id="quarto-sidebar-section-1" aria-labelledby="quarto-sidebar-section-1-label" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../experiments/01-leaning-tower-of-pisa.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">01. Leaning Tower of Pisa</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" aria-labelledby="toc-title" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#the-physics-problem-analytical-laws" id="toc-the-physics-problem-analytical-laws" class="nav-link active" data-scroll-target="#the-physics-problem-analytical-laws">1. The Physics Problem &amp; Analytical Laws</a>
+  <ul class="collapse">
+  <li><a href="#case-a-free-fall-in-a-vacuum-gravity-only" id="toc-case-a-free-fall-in-a-vacuum-gravity-only" class="nav-link" data-scroll-target="#case-a-free-fall-in-a-vacuum-gravity-only">Case A: Free Fall in a Vacuum (Gravity Only)</a></li>
+  <li><a href="#case-b-falling-through-air-gravity-air-resistance" id="toc-case-b-falling-through-air-gravity-air-resistance" class="nav-link" data-scroll-target="#case-b-falling-through-air-gravity-air-resistance">Case B: Falling Through Air (Gravity + Air Resistance)</a></li>
+  </ul></li>
+  <li><a href="#the-simulation-method-eulercromer-integration" id="toc-the-simulation-method-eulercromer-integration" class="nav-link" data-scroll-target="#the-simulation-method-eulercromer-integration">2. The Simulation Method: Euler–Cromer Integration</a></li>
+  <li><a href="#interactive-lab-simulation" id="toc-interactive-lab-simulation" class="nav-link" data-scroll-target="#interactive-lab-simulation">3. Interactive Lab Simulation</a></li>
+  <li><a href="#python-source-code-run-on-your-own-computer" id="toc-python-source-code-run-on-your-own-computer" class="nav-link" data-scroll-target="#python-source-code-run-on-your-own-computer">4. Python Source Code (Run on Your Own Computer)</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content" tabindex="-1">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="Breadcrumbs"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../experiments/01-leaning-tower-of-pisa.html">Classical Mechanics</a></li><li class="breadcrumb-item"><a href="../experiments/01-leaning-tower-of-pisa.html">01. Leaning Tower of Pisa</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Experiment 01: The Leaning Tower of Pisa</h1>
+<p class="subtitle lead">How Newton’s Second Law governs falling objects in a vacuum and in air</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="the-physics-problem-analytical-laws" class="level2">
+<h2 class="anchored" data-anchor-id="the-physics-problem-analytical-laws">1. The Physics Problem &amp; Analytical Laws</h2>
+<p>Legend holds that around 1589, Galileo Galilei dropped two spheres of different masses from the top of the <strong>Leaning Tower of Pisa</strong> (<span class="math inline">\(H = 56\text{ m}\)</span>) to test whether heavier objects fall faster than lighter ones. Nearly four centuries later, in 1971, Apollo 15 astronaut David Scott repeated the experiment on the airless Moon using a <strong>geology hammer</strong> and a <strong>falcon feather</strong>—and both hit the lunar surface at the exact same instant.</p>
+<p>Why do a hammer and a feather tie in a vacuum, yet separate dramatically in Earth’s atmosphere? The answer lies in <strong>Newton’s Second Law of Motion</strong>:</p>
+<p><span class="math display">\[F_{\text{net}} = m \cdot a \quad \Longrightarrow \quad a = \frac{F_{\text{net}}}{m}\]</span></p>
+<p>where <span class="math inline">\(F_{\text{net}}\)</span> is the total net force acting on the object (in Newtons, <span class="math inline">\(\text{N}\)</span>), <span class="math inline">\(m\)</span> is its mass (<span class="math inline">\(\text{kg}\)</span>), and <span class="math inline">\(a\)</span> is its downward acceleration (<span class="math inline">\(\text{m/s}^2\)</span>).</p>
+<section id="case-a-free-fall-in-a-vacuum-gravity-only" class="level3">
+<h3 class="anchored" data-anchor-id="case-a-free-fall-in-a-vacuum-gravity-only">Case A: Free Fall in a Vacuum (Gravity Only)</h3>
+<p>In a vacuum, the only force pulling the object downward is gravity, <span class="math inline">\(F_g = m g\)</span>, where <span class="math inline">\(g \approx 9.81\text{ m/s}^2\)</span> near Earth’s surface. Substituting this into Newton’s Second Law:</p>
+<p><span class="math display">\[a = \frac{F_g}{m} = \frac{m g}{m} = g\]</span></p>
+<p>Notice that <strong>mass <span class="math inline">\(m\)</span> cancels out completely</strong>. Because every object accelerates at the exact same rate <span class="math inline">\(g\)</span>, velocity <span class="math inline">\(v(t)\)</span> and distance fallen <span class="math inline">\(d(t)\)</span> follow clean analytical formulas:</p>
+<p><span class="math display">\[v(t) = g t \qquad \text{and} \qquad d(t) = \frac{1}{2} g t^2\]</span></p>
+<p>From a <span class="math inline">\(H = 56\text{ m}\)</span> tower, both the hammer and the feather land in:</p>
+<p><span class="math display">\[t_{\text{land}} = \sqrt{\frac{2H}{g}} = \sqrt{\frac{2(56)}{9.81}} \approx 3.38\text{ s}\]</span></p>
+</section>
+<section id="case-b-falling-through-air-gravity-air-resistance" class="level3">
+<h3 class="anchored" data-anchor-id="case-b-falling-through-air-gravity-air-resistance">Case B: Falling Through Air (Gravity + Air Resistance)</h3>
+<p>In Earth’s atmosphere, a falling object collides with air molecules, creating an upward <strong>aerodynamic drag force</strong> <span class="math inline">\(F_d\)</span> that grows with the square of its speed:</p>
+<p><span class="math display">\[F_d = \frac{1}{2} \rho C_d A v^2\]</span></p>
+<ul>
+<li><span class="math inline">\(\rho\)</span>: air density (<span class="math inline">\(\approx 1.225\text{ kg/m}^3\)</span> at sea level)</li>
+<li><span class="math inline">\(C_d\)</span>: dimensionless drag coefficient (shape roughness)</li>
+<li><span class="math inline">\(A\)</span>: cross-sectional area facing the airflow (<span class="math inline">\(\text{m}^2\)</span>)</li>
+</ul>
+<p>Applying Newton’s Second Law now gives:</p>
+<p><span class="math display">\[a(t) = \frac{F_g - F_d}{m} = g - \frac{\rho C_d A}{2m} v(t)^2\]</span></p>
+<p>Here, <strong>mass no longer cancels out</strong>. For a light feather with a broad surface area, <span class="math inline">\(\frac{\rho C_d A}{2m}\)</span> is large—so <span class="math inline">\(F_d\)</span> quickly grows until it equals gravity (<span class="math inline">\(F_d = m g\)</span>). At that point, net force and acceleration drop to <strong>zero</strong> (<span class="math inline">\(a = 0\)</span>), and the feather stops speeding up, drifting downward at a constant <strong>terminal velocity</strong>:</p>
+<p><span class="math display">\[v_t = \sqrt{\frac{2 m g}{\rho C_d A}}\]</span></p>
+<hr>
+</section>
+</section>
+<section id="the-simulation-method-eulercromer-integration" class="level2">
+<h2 class="anchored" data-anchor-id="the-simulation-method-eulercromer-integration">2. The Simulation Method: Euler–Cromer Integration</h2>
+<p>Because air drag changes continuously as velocity changes, we let the computer simulate the fall in tiny time slices of <span class="math inline">\(\Delta t = 0.01\text{ seconds}\)</span> using the <strong>Euler–Cromer method</strong>:</p>
+<ol type="1">
+<li><strong>Calculate forces &amp; acceleration</strong> at the current step <span class="math inline">\(i\)</span>: <span class="math display">\[a_i = g - \frac{\rho C_d A}{2m} v_i^2\]</span></li>
+<li><strong>Update velocity</strong> over the tiny time slice <span class="math inline">\(\Delta t\)</span>: <span class="math display">\[v_{i+1} = v_i + a_i \Delta t\]</span></li>
+<li><strong>Update altitude</strong> using the newly updated velocity: <span class="math display">\[y_{i+1} = y_i - v_{i+1} \Delta t\]</span></li>
+</ol>
+<p>Repeating these steps reconstructs the entire trajectory from the top of the tower (<span class="math inline">\(y = H\)</span>) to the ground (<span class="math inline">\(y = 0\text{ m}\)</span>).</p>
+<hr>
+</section>
+<section id="interactive-lab-simulation" class="level2">
+<h2 class="anchored" data-anchor-id="interactive-lab-simulation">3. Interactive Lab Simulation</h2>
+<p>Use the <strong>sliders or number boxes</strong> below to change the tower height, object masses, or gravity, then click <strong>Play</strong> (or drag the timeline scrubber) to observe the fall in <strong>true 1:1 real-time</strong> (<code>1 second</code> on the simulation clock = <code>1 second</code> on a real stopwatch).</p>
+<div class="sim-controls">
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="79" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 78;"><span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> <span class="fu">debounce</span>(view<span class="op">,</span> delay <span class="op">=</span> <span class="dv">250</span>) {</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Generators<span class="op">.</span><span class="fu">observe</span>(notify <span class="kw">=&gt;</span> {</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">let</span> timer <span class="op">=</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> onInput <span class="op">=</span> () <span class="kw">=&gt;</span> {</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>      <span class="pp">clearTimeout</span>(timer)<span class="op">;</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>      timer <span class="op">=</span> <span class="pp">setTimeout</span>(() <span class="kw">=&gt;</span> <span class="fu">notify</span>(view<span class="op">.</span><span class="at">value</span>)<span class="op">,</span> delay)<span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    }<span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    view<span class="op">.</span><span class="fu">addEventListener</span>(<span class="st">"input"</span><span class="op">,</span> onInput)<span class="op">;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>    <span class="fu">notify</span>(view<span class="op">.</span><span class="at">value</span>)<span class="op">;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> () <span class="kw">=&gt;</span> view<span class="op">.</span><span class="fu">removeEventListener</span>(<span class="st">"input"</span><span class="op">,</span> onInput)<span class="op">;</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>viewof tower_height_ui <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="dv">10</span><span class="op">,</span> <span class="dv">250</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="dv">56</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="dv">1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Tower Height H (m)"</span>})</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>viewof hammer_mass_ui <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.2</span><span class="op">,</span> <span class="fl">10.0</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="fl">1.5</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.1</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Hammer Mass (kg)"</span>})</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>viewof feather_mass_ui <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">range</span>([<span class="fl">0.001</span><span class="op">,</span> <span class="fl">0.100</span>]<span class="op">,</span> {<span class="dt">value</span><span class="op">:</span> <span class="fl">0.002</span><span class="op">,</span> <span class="dt">step</span><span class="op">:</span> <span class="fl">0.001</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Feather Mass (kg)"</span>})</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>viewof gravity_ui <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>(</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  <span class="kw">new</span> <span class="bu">Map</span>([</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Earth (9.81 m/s²)"</span><span class="op">,</span> <span class="fl">9.81</span>]<span class="op">,</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Moon (1.62 m/s²)"</span><span class="op">,</span> <span class="fl">1.62</span>]<span class="op">,</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>    [<span class="st">"Mars (3.72 m/s²)"</span><span class="op">,</span> <span class="fl">3.72</span>]</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  ])<span class="op">,</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>  {<span class="dt">value</span><span class="op">:</span> <span class="fl">9.81</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="st">"Gravity g"</span>}</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>tower_height <span class="op">=</span> <span class="fu">debounce</span>(viewof tower_height_ui<span class="op">,</span> <span class="dv">250</span>)</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>hammer_mass <span class="op">=</span> <span class="fu">debounce</span>(viewof hammer_mass_ui<span class="op">,</span> <span class="dv">250</span>)</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>feather_mass <span class="op">=</span> <span class="fu">debounce</span>(viewof feather_mass_ui<span class="op">,</span> <span class="dv">250</span>)</span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>gravity <span class="op">=</span> gravity_ui</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-6" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-7" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-8" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<div id="ojs-cell-1-9" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+</div>
+<div>
+<div id="pyodide-1" class="exercise-cell">
+
+</div>
+<script type="pyodide-1-contents">
+eyJhdHRyIjp7ImVjaG8iOmZhbHNlLCJlZGl0IjpmYWxzZSwiZXZhbCI6dHJ1ZSwiaW5wdXQiOlsidG93ZXJfaGVpZ2h0IiwiaGFtbWVyX21hc3MiLCJmZWF0aGVyX21hc3MiLCJncmF2aXR5Il19LCJjb2RlIjoiaW1wb3J0IHN5c1xuaW1wb3J0IGpzb25cbmltcG9ydCB1dWlkXG5zeXMucGF0aC5leHRlbmQoW1wiLlwiLCBcIi4uXCJdKVxuXG5pbXBvcnQgbnVtcHkgYXMgbnBcbmZyb20gSVB5dGhvbi5kaXNwbGF5IGltcG9ydCBIVE1MXG5mcm9tIHBoeXNraXQuaW50ZWdyYXRvcnMgaW1wb3J0IHNpbXVsYXRlX3ZlcnRpY2FsX2ZhbGxcblxuSCA9IGZsb2F0KHRvd2VyX2hlaWdodClcbkcgPSBmbG9hdChncmF2aXR5KVxuUkhPID0gMS4yMjVcblxuSEFNX00sIEhBTV9BLCBIQU1fQ0QgPSBmbG9hdChoYW1tZXJfbWFzcyksIDAuMDA4LCAwLjgwXG5GRUFfTSwgRkVBX0EsIEZFQV9DRCA9IGZsb2F0KGZlYXRoZXJfbWFzcyksIDAuMDA0LCAxLjIwXG5EVCA9IDAuMDFcblxuIyBFc3RpbWF0ZSB0b3RhbCBkdXJhdGlvbiBzbyBib3RoIG9iamVjdHMgcmVhY2ggdGhlIGdyb3VuZCAoY2FwcGVkIGF0IDEyMCBzKVxudl90ZXJtX2ZlYSA9IG5wLnNxcnQoMi4wICogRkVBX00gKiBHIC8gKFJITyAqIEZFQV9DRCAqIEZFQV9BKSlcbnRfZXN0ID0gbnAuc3FydCgyLjAgKiBIIC8gRykgKyAoSCAvIG1heCh2X3Rlcm1fZmVhLCAwLjUpKSArIDEuMFxuVF9NQVggPSBmbG9hdChucC5jbGlwKG5wLmNlaWwodF9lc3QpLCA1LjAsIDEyMC4wKSlcblxuIyBSdW4gdGhlIDQgRXVsZXItQ3JvbWVyIHNpbXVsYXRpb25zXG5oYW1fdmFjID0gc2ltdWxhdGVfdmVydGljYWxfZmFsbChILCBIQU1fTSwgSEFNX0EsIDAuMCwgUkhPLCBHLCBEVCwgVF9NQVgpXG5mZWFfdmFjID0gc2ltdWxhdGVfdmVydGljYWxfZmFsbChILCBGRUFfTSwgRkVBX0EsIDAuMCwgUkhPLCBHLCBEVCwgVF9NQVgpXG5oYW1fYWlyID0gc2ltdWxhdGVfdmVydGljYWxfZmFsbChILCBIQU1fTSwgSEFNX0EsIEhBTV9DRCwgUkhPLCBHLCBEVCwgVF9NQVgpXG5mZWFfYWlyID0gc2ltdWxhdGVfdmVydGljYWxfZmFsbChILCBGRUFfTSwgRkVBX0EsIEZFQV9DRCwgUkhPLCBHLCBEVCwgVF9NQVgpXG5cbmRlZiBmbXRfaW1wYWN0KHJlcyk6XG4gICAgcmV0dXJuIGZcIntyZXNbJ3RfaW1wYWN0J106LjJmfSBzICh2ID0ge3Jlc1sndl9pbXBhY3QnXTouMWZ9IG0vcylcIiBpZiByZXNbXCJ0X2ltcGFjdFwiXSBlbHNlIGZcIj4ge1RfTUFYOi4wZn0gc1wiXG5cbnByaW50KGZcIlZhY3V1bSBJbXBhY3QgLT4gSGFtbWVyOiB7Zm10X2ltcGFjdChoYW1fdmFjKX0gfCBGZWF0aGVyOiB7Zm10X2ltcGFjdChmZWFfdmFjKX1cIilcbnByaW50KGZcIkFpciBJbXBhY3QgICAgLT4gSGFtbWVyOiB7Zm10X2ltcGFjdChoYW1fYWlyKX0gfCBGZWF0aGVyOiB7Zm10X2ltcGFjdChmZWFfYWlyKX1cIilcblxuIyBEb3duc2FtcGxlIHRvIDAuMDIgcyBzdGVwIGZvciBjb21wYWN0ICh+NTAgS0IpIEpTT04gdHJhbnNmZXIgdG8gSFRNTDUgQ2FudmFzXG5zdHJpZGUgPSAyXG5kZWYgcGFjayhhcnIpOlxuICAgIHJldHVybiBucC5yb3VuZChhcnJbOjpzdHJpZGVdLCA0KS50b2xpc3QoKVxuXG5wYXlsb2FkID0ge1xuICAgIFwiSFwiOiBILFxuICAgIFwiR1wiOiBHLFxuICAgIFwiVF9NQVhcIjogVF9NQVgsXG4gICAgXCJ2X21heFwiOiBmbG9hdChtYXgobnAubWF4KGhhbV92YWNbXCJ2XCJdKSAqIDEuMTUsIDUuMCkpLFxuICAgIFwidFwiOiBwYWNrKGhhbV92YWNbXCJ0XCJdKSxcbiAgICBcImh2X3lcIjogcGFjayhoYW1fdmFjW1wieVwiXSksXG4gICAgXCJmdl95XCI6IHBhY2soZmVhX3ZhY1tcInlcIl0pLFxuICAgIFwiaGFfeVwiOiBwYWNrKGhhbV9haXJbXCJ5XCJdKSxcbiAgICBcImZhX3lcIjogcGFjayhmZWFfYWlyW1wieVwiXSksXG4gICAgXCJ2YWNfdlwiOiBwYWNrKGhhbV92YWNbXCJ2XCJdKSxcbiAgICBcImhhX3ZcIjogcGFjayhoYW1fYWlyW1widlwiXSksXG4gICAgXCJmYV92XCI6IHBhY2soZmVhX2FpcltcInZcIl0pLFxuICAgIFwidmFjX2FcIjogcGFjayhoYW1fdmFjW1wiYVwiXSksXG4gICAgXCJoYV9hXCI6IHBhY2soaGFtX2FpcltcImFcIl0pLFxuICAgIFwiZmFfYVwiOiBwYWNrKGZlYV9haXJbXCJhXCJdKSxcbiAgICBcInZhY19kXCI6IHBhY2soaGFtX3ZhY1tcImRcIl0pLFxuICAgIFwiaGFfZFwiOiBwYWNrKGhhbV9haXJbXCJkXCJdKSxcbiAgICBcImZhX2RcIjogcGFjayhmZWFfYWlyW1wiZFwiXSksXG59XG5cbnVpZCA9IHV1aWQudXVpZDQoKS5oZXhbOjhdXG5kYXRhX2pzb24gPSBqc29uLmR1bXBzKHBheWxvYWQpXG5cbmh0bWxfd2lkZ2V0ID0gZlwiXCJcIlxuPGRpdiBpZD1cInNpbS1ib3gte3VpZH1cIiBzdHlsZT1cImJvcmRlcjoxcHggc29saWQgI0NCRDVFMTsgYm9yZGVyLXJhZGl1czo4cHg7IGJhY2tncm91bmQ6I0ZGRkZGRjsgcGFkZGluZzoxMnB4OyBtYXJnaW4tdG9wOjhweDtcIj5cbiAgPGRpdiBzdHlsZT1cImRpc3BsYXk6ZmxleDsgZmxleC13cmFwOndyYXA7IGFsaWduLWl0ZW1zOmNlbnRlcjsgZ2FwOjEwcHg7IG1hcmdpbi1ib3R0b206MTBweDsgcGFkZGluZy1ib3R0b206OHB4OyBib3JkZXItYm90dG9tOjFweCBzb2xpZCAjRTJFOEYwO1wiPlxuICAgIDxidXR0b24gaWQ9XCJidG4tcGxheS17dWlkfVwiIHN0eWxlPVwiYmFja2dyb3VuZDojMEIxRjNBOyBjb2xvcjojRkZGOyBib3JkZXI6bm9uZTsgYm9yZGVyLXJhZGl1czo1cHg7IHBhZGRpbmc6NnB4IDE0cHg7IGZvbnQtd2VpZ2h0OjYwMDsgY3Vyc29yOnBvaW50ZXI7XCI+UGxheTwvYnV0dG9uPlxuICAgIDxidXR0b24gaWQ9XCJidG4tcmVzZXQte3VpZH1cIiBzdHlsZT1cImJhY2tncm91bmQ6I0YxRjVGOTsgY29sb3I6IzBCMUYzQTsgYm9yZGVyOjFweCBzb2xpZCAjQ0JENUUxOyBib3JkZXItcmFkaXVzOjVweDsgcGFkZGluZzo2cHggMTJweDsgZm9udC13ZWlnaHQ6NjAwOyBjdXJzb3I6cG9pbnRlcjtcIj5SZXNldDwvYnV0dG9uPlxuICAgIDxpbnB1dCBpZD1cInNjcnViLXt1aWR9XCIgdHlwZT1cInJhbmdlXCIgbWluPVwiMFwiIG1heD1cIntsZW4ocGF5bG9hZFsndCddKS0xfVwiIHZhbHVlPVwiMFwiIHN0eWxlPVwiZmxleDoxOyBtaW4td2lkdGg6MTQwcHg7IGFjY2VudC1jb2xvcjojMUM5MzlBOyBjdXJzb3I6cG9pbnRlcjtcIj5cbiAgICA8c3BhbiBpZD1cImNsb2NrLXt1aWR9XCIgc3R5bGU9XCJmb250LWZhbWlseTptb25vc3BhY2U7IGZvbnQtc2l6ZToxM3B4OyBmb250LXdlaWdodDo3MDA7IGJhY2tncm91bmQ6IzBCMUYzQTsgY29sb3I6I0ZGRjsgcGFkZGluZzo0cHggMTBweDsgYm9yZGVyLXJhZGl1czo1cHg7XCI+XG4gICAgICB0ID0gIDAuMDAgcyAoMS4ww5cgUmVhbC1UaW1lKVxuICAgIDwvc3Bhbj5cbiAgPC9kaXY+XG4gIDxjYW52YXMgaWQ9XCJjYW52YXMte3VpZH1cIiBzdHlsZT1cIndpZHRoOjEwMCU7IGhlaWdodDphdXRvOyBkaXNwbGF5OmJsb2NrO1wiPjwvY2FudmFzPlxuPC9kaXY+XG5cbjxzY3JpcHQ+XG4oZnVuY3Rpb24oKSB7e1xuICBjb25zdCBkYXRhID0ge2RhdGFfanNvbn07XG4gIGNvbnN0IGNhbnZhcyA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiY2FudmFzLXt1aWR9XCIpO1xuICBjb25zdCBidG5QbGF5ID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJidG4tcGxheS17dWlkfVwiKTtcbiAgY29uc3QgYnRuUmVzZXQgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcImJ0bi1yZXNldC17dWlkfVwiKTtcbiAgY29uc3Qgc2NydWIgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZChcInNjcnViLXt1aWR9XCIpO1xuICBjb25zdCBjbG9ja0xhYmVsID0gZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoXCJjbG9jay17dWlkfVwiKTtcbiAgaWYgKCFjYW52YXMpIHJldHVybjtcblxuICBjb25zdCBXID0gOTYwLCBIX1BYID0gNTIwO1xuICBjb25zdCBkcHIgPSB3aW5kb3cuZGV2aWNlUGl4ZWxSYXRpbyB8fCAxO1xuICBjYW52YXMud2lkdGggPSBXICogZHByO1xuICBjYW52YXMuaGVpZ2h0ID0gSF9QWCAqIGRwcjtcbiAgY29uc3QgY3R4ID0gY2FudmFzLmdldENvbnRleHQoXCIyZFwiKTtcbiAgY3R4LnNjYWxlKGRwciwgZHByKTtcblxuICBjb25zdCBOQVZZID0gXCIjMEIxRjNBXCIsIFRFQUwgPSBcIiMxQzkzOUFcIiwgR09MRCA9IFwiI0Q5NzcwNlwiLCBTTEFURSA9IFwiIzY0NzQ4QlwiLCBCRyA9IFwiI0Y4RkFGQ1wiO1xuICBjb25zdCBOID0gZGF0YS50Lmxlbmd0aDtcbiAgbGV0IHNpbVRpbWUgPSAwLjA7XG4gIGxldCBwbGF5aW5nID0gZmFsc2U7XG4gIGxldCBsYXN0V2FsbCA9IG51bGw7XG5cbiAgZnVuY3Rpb24gZHJhd0hhbW1lcih4LCB5LCBjb2xvcikge3tcbiAgICBjdHguc2F2ZSgpO1xuICAgIGN0eC50cmFuc2xhdGUoeCwgeSk7XG4gICAgY3R4LmZpbGxTdHlsZSA9IGNvbG9yO1xuICAgIGN0eC5maWxsUmVjdCgtMi41LCAtNCwgNSwgMTYpOyAgIC8vIGhhbmRsZVxuICAgIGN0eC5maWxsUmVjdCgtMTAsIC0xMSwgMjAsIDcpOyAgIC8vIGhlYWRcbiAgICBjdHgucmVzdG9yZSgpO1xuICB9fVxuXG4gIGZ1bmN0aW9uIGRyYXdGZWF0aGVyKHgsIHksIGNvbG9yKSB7e1xuICAgIGN0eC5zYXZlKCk7XG4gICAgY3R4LnRyYW5zbGF0ZSh4LCB5KTtcbiAgICBjdHguZmlsbFN0eWxlID0gY29sb3I7XG4gICAgY3R4LmJlZ2luUGF0aCgpO1xuICAgIGN0eC5tb3ZlVG8oLTksIDkpO1xuICAgIGN0eC5xdWFkcmF0aWNDdXJ2ZVRvKC04LCAtNCwgOSwgLTkpO1xuICAgIGN0eC5xdWFkcmF0aWNDdXJ2ZVRvKDYsIDUsIC05LCA5KTtcbiAgICBjdHguZmlsbCgpO1xuICAgIGN0eC5zdHJva2VTdHlsZSA9IFwiI0ZGRkZGRlwiO1xuICAgIGN0eC5saW5lV2lkdGggPSAxLjI7XG4gICAgY3R4LmJlZ2luUGF0aCgpO1xuICAgIGN0eC5tb3ZlVG8oLTksIDkpO1xuICAgIGN0eC5saW5lVG8oNywgLTcpO1xuICAgIGN0eC5zdHJva2UoKTtcbiAgICBjdHgucmVzdG9yZSgpO1xuICB9fVxuXG4gIGZ1bmN0aW9uIGRyYXdTZXJpZXMoYm94LCB0QXJyLCB5QXJyLCBpZHgsIHlNaW4sIHlNYXgsIGNvbG9yLCBkYXNoZWQpIHt7XG4gICAgY3R4LnNhdmUoKTtcbiAgICBjdHguc3Ryb2tlU3R5bGUgPSBjb2xvcjtcbiAgICBjdHgubGluZVdpZHRoID0gZGFzaGVkID8gMS44IDogMi4zO1xuICAgIGN0eC5zZXRMaW5lRGFzaChkYXNoZWQgPyBbNSwgNF0gOiBbXSk7XG4gICAgY3R4LmJlZ2luUGF0aCgpO1xuICAgIGZvciAobGV0IGkgPSAwOyBpIDw9IGlkeDsgaSsrKSB7e1xuICAgICAgY29uc3QgcHggPSBib3gueCArICh0QXJyW2ldIC8gZGF0YS5UX01BWCkgKiBib3gudztcbiAgICAgIGNvbnN0IHB5ID0gYm94LnkgKyBib3guaCAtICgoeUFycltpXSAtIHlNaW4pIC8gKHlNYXggLSB5TWluKSkgKiBib3guaDtcbiAgICAgIGlmIChpID09PSAwKSBjdHgubW92ZVRvKHB4LCBweSk7XG4gICAgICBlbHNlIGN0eC5saW5lVG8ocHgsIHB5KTtcbiAgICB9fVxuICAgIGN0eC5zdHJva2UoKTtcbiAgICAvLyBDdXJyZW50IHZhbHVlIGRvdFxuICAgIGNvbnN0IGN4ID0gYm94LnggKyAodEFycltpZHhdIC8gZGF0YS5UX01BWCkgKiBib3gudztcbiAgICBjb25zdCBjeSA9IGJveC55ICsgYm94LmggLSAoKHlBcnJbaWR4XSAtIHlNaW4pIC8gKHlNYXggLSB5TWluKSkgKiBib3guaDtcbiAgICBjdHguc2V0TGluZURhc2goW10pO1xuICAgIGN0eC5maWxsU3R5bGUgPSBjb2xvcjtcbiAgICBjdHguYmVnaW5QYXRoKCk7XG4gICAgY3R4LmFyYyhjeCwgY3ksIDMuNSwgMCwgTWF0aC5QSSAqIDIpO1xuICAgIGN0eC5maWxsKCk7XG4gICAgY3R4LnJlc3RvcmUoKTtcbiAgfX1cblxuICBmdW5jdGlvbiByZW5kZXJGcmFtZShpZHgpIHt7XG4gICAgY3R4LmNsZWFyUmVjdCgwLCAwLCBXLCBIX1BYKTtcbiAgICBjdHguZmlsbFN0eWxlID0gXCIjRkZGRkZGXCI7XG4gICAgY3R4LmZpbGxSZWN0KDAsIDAsIFcsIEhfUFgpO1xuXG4gICAgLy8gLS0tIExFRlQgUEFORUw6IFRPV0VSIERST1AgQVJFTkEgLS0tXG4gICAgY29uc3QgYXJlbmEgPSB7eyB4OiA2NCwgeTogNDIsIHc6IDMyMCwgaDogNDIwIH19O1xuICAgIGN0eC5maWxsU3R5bGUgPSBCRztcbiAgICBjdHguZmlsbFJlY3QoYXJlbmEueCwgYXJlbmEueSwgYXJlbmEudywgYXJlbmEuaCk7XG4gICAgY3R4LnN0cm9rZVN0eWxlID0gXCIjQ0JENUUxXCI7XG4gICAgY3R4LmxpbmVXaWR0aCA9IDE7XG4gICAgY3R4LnN0cm9rZVJlY3QoYXJlbmEueCwgYXJlbmEueSwgYXJlbmEudywgYXJlbmEuaCk7XG5cbiAgICAvLyBDZW50ZXIgZGl2aWRlciAmIGdyb3VuZFxuICAgIGN0eC5iZWdpblBhdGgoKTtcbiAgICBjdHgubW92ZVRvKGFyZW5hLnggKyBhcmVuYS53IC8gMiwgYXJlbmEueSk7XG4gICAgY3R4LmxpbmVUbyhhcmVuYS54ICsgYXJlbmEudyAvIDIsIGFyZW5hLnkgKyBhcmVuYS5oKTtcbiAgICBjdHguc3Ryb2tlKCk7XG5cbiAgICBjdHguZmlsbFN0eWxlID0gTkFWWTtcbiAgICBjdHguZm9udCA9IFwiYm9sZCAxM3B4IHNhbnMtc2VyaWZcIjtcbiAgICBjdHgudGV4dEFsaWduID0gXCJjZW50ZXJcIjtcbiAgICBjdHguZmlsbFRleHQoYFRvd2VyIERyb3AgQXJlbmEgKCR7e2RhdGEuSC50b0ZpeGVkKDApfX0gbSlgLCBhcmVuYS54ICsgYXJlbmEudyAvIDIsIDI0KTtcbiAgICBjdHguZm9udCA9IFwiYm9sZCAxMXB4IHNhbnMtc2VyaWZcIjtcbiAgICBjdHguZmlsbFRleHQoXCJWQUNVVU0gKE5vIEFpcilcIiwgYXJlbmEueCArIGFyZW5hLncgKiAwLjI1LCBhcmVuYS55ICsgYXJlbmEuaCArIDIwKTtcbiAgICBjdHguZmlsbFRleHQoXCJBVE1PU1BIRVJFIChEcmFnKVwiLCBhcmVuYS54ICsgYXJlbmEudyAqIDAuNzUsIGFyZW5hLnkgKyBhcmVuYS5oICsgMjApO1xuXG4gICAgLy8gQWx0aXR1ZGUgdGlja3NcbiAgICBjdHguZm9udCA9IFwiMTFweCBzYW5zLXNlcmlmXCI7XG4gICAgY3R4LmZpbGxTdHlsZSA9IFNMQVRFO1xuICAgIGN0eC50ZXh0QWxpZ24gPSBcInJpZ2h0XCI7XG4gICAgZm9yIChsZXQgayA9IDA7IGsgPD0gNDsgaysrKSB7e1xuICAgICAgY29uc3QgZnJhYyA9IGsgLyA0O1xuICAgICAgY29uc3QgcHkgPSBhcmVuYS55ICsgYXJlbmEuaCAtIGZyYWMgKiAoYXJlbmEuaCAtIDI0KTtcbiAgICAgIGN0eC5zdHJva2VTdHlsZSA9IFwiI0UyRThGMFwiO1xuICAgICAgY3R4LmJlZ2luUGF0aCgpO1xuICAgICAgY3R4Lm1vdmVUbyhhcmVuYS54LCBweSk7XG4gICAgICBjdHgubGluZVRvKGFyZW5hLnggKyBhcmVuYS53LCBweSk7XG4gICAgICBjdHguc3Ryb2tlKCk7XG4gICAgICBjdHguZmlsbFRleHQoYCR7eyhmcmFjICogZGF0YS5IKS50b0ZpeGVkKDApfX0gbWAsIGFyZW5hLnggLSA4LCBweSArIDQpO1xuICAgIH19XG5cbiAgICAvLyBHcm91bmQgYmFyXG4gICAgY3R4LmZpbGxTdHlsZSA9IE5BVlk7XG4gICAgY3R4LmZpbGxSZWN0KGFyZW5hLngsIGFyZW5hLnkgKyBhcmVuYS5oIC0gMywgYXJlbmEudywgNCk7XG5cbiAgICBjb25zdCBtYXBZID0gKHlWYWwpID0+IGFyZW5hLnkgKyBhcmVuYS5oIC0gMTAgLSAoeVZhbCAvIGRhdGEuSCkgKiAoYXJlbmEuaCAtIDM0KTtcbiAgICBkcmF3SGFtbWVyKGFyZW5hLnggKyBhcmVuYS53ICogMC4xNiwgbWFwWShkYXRhLmh2X3lbaWR4XSksIE5BVlkpO1xuICAgIGRyYXdGZWF0aGVyKGFyZW5hLnggKyBhcmVuYS53ICogMC4zNCwgbWFwWShkYXRhLmZ2X3lbaWR4XSksIFRFQUwpO1xuICAgIGRyYXdIYW1tZXIoYXJlbmEueCArIGFyZW5hLncgKiAwLjY2LCBtYXBZKGRhdGEuaGFfeVtpZHhdKSwgTkFWWSk7XG4gICAgZHJhd0ZlYXRoZXIoYXJlbmEueCArIGFyZW5hLncgKiAwLjg0LCBtYXBZKGRhdGEuZmFfeVtpZHhdKSwgR09MRCk7XG5cbiAgICAvLyBMZWdlbmQgc3RyaXAgaW5zaWRlIGFyZW5hIHRvcFxuICAgIGN0eC5mb250ID0gXCIxMXB4IHNhbnMtc2VyaWZcIjtcbiAgICBjdHgudGV4dEFsaWduID0gXCJsZWZ0XCI7XG4gICAgY3R4LmZpbGxTdHlsZSA9IE5BVlk7IGN0eC5maWxsVGV4dChcIuKWoCBIYW1tZXJcIiwgYXJlbmEueCArIDEyLCBhcmVuYS55ICsgMTYpO1xuICAgIGN0eC5maWxsU3R5bGUgPSBURUFMOyBjdHguZmlsbFRleHQoXCLilrIgRmVhdGhlciAoVmFjKVwiLCBhcmVuYS54ICsgODgsIGFyZW5hLnkgKyAxNik7XG4gICAgY3R4LmZpbGxTdHlsZSA9IEdPTEQ7IGN0eC5maWxsVGV4dChcIuKWsiBGZWF0aGVyIChBaXIpXCIsIGFyZW5hLnggKyAxOTUsIGFyZW5hLnkgKyAxNik7XG5cbiAgICAvLyAtLS0gUklHSFQgQ09MVU1OOiAzIEtJTkVNQVRJQ1MgUEFORUxTIC0tLVxuICAgIGNvbnN0IHBhbmVscyA9IFtcbiAgICAgIHt7IHRpdGxlOiBcIktpbmVtYXRpY3MgdnMuIFRpbWUg4oCUIFNwZWVkIHYgKG0vcylcIiwgeU1pbjogMCwgeU1heDogZGF0YS52X21heCwgc2VyaWVzOiBbZGF0YS52YWNfdiwgZGF0YS5oYV92LCBkYXRhLmZhX3ZdLCB5OiA0MiB9fSxcbiAgICAgIHt7IHRpdGxlOiBcIkFjY2VsZXJhdGlvbiBhIChtL3PCsilcIiwgeU1pbjogMCwgeU1heDogZGF0YS5HICogMS4xOCwgc2VyaWVzOiBbZGF0YS52YWNfYSwgZGF0YS5oYV9hLCBkYXRhLmZhX2FdLCB5OiAxOTYgfX0sXG4gICAgICB7eyB0aXRsZTogXCJEaXN0YW5jZSBGYWxsZW4gZCAobSlcIiwgeU1pbjogMCwgeU1heDogZGF0YS5IICogMS4wOCwgc2VyaWVzOiBbZGF0YS52YWNfZCwgZGF0YS5oYV9kLCBkYXRhLmZhX2RdLCB5OiAzNTAgfX0sXG4gICAgXTtcblxuICAgIHBhbmVscy5mb3JFYWNoKChwLCBwSWR4KSA9PiB7e1xuICAgICAgY29uc3QgYm94ID0ge3sgeDogNDY1LCB5OiBwLnksIHc6IDQ2NSwgaDogMTEyIH19O1xuICAgICAgY3R4LmZpbGxTdHlsZSA9IEJHO1xuICAgICAgY3R4LmZpbGxSZWN0KGJveC54LCBib3gueSwgYm94LncsIGJveC5oKTtcbiAgICAgIGN0eC5zdHJva2VTdHlsZSA9IFwiI0NCRDVFMVwiO1xuICAgICAgY3R4LmxpbmVXaWR0aCA9IDE7XG4gICAgICBjdHguc3Ryb2tlUmVjdChib3gueCwgYm94LnksIGJveC53LCBib3guaCk7XG5cbiAgICAgIGN0eC5maWxsU3R5bGUgPSBOQVZZO1xuICAgICAgY3R4LmZvbnQgPSBcImJvbGQgMTJweCBzYW5zLXNlcmlmXCI7XG4gICAgICBjdHgudGV4dEFsaWduID0gXCJsZWZ0XCI7XG4gICAgICBjdHguZmlsbFRleHQocC50aXRsZSwgYm94LngsIGJveC55IC0gNyk7XG5cbiAgICAgIC8vIFktYXhpcyBtaW4vbWF4IGxhYmVsc1xuICAgICAgY3R4LmZpbGxTdHlsZSA9IFNMQVRFO1xuICAgICAgY3R4LmZvbnQgPSBcIjEwLjVweCBzYW5zLXNlcmlmXCI7XG4gICAgICBjdHgudGV4dEFsaWduID0gXCJyaWdodFwiO1xuICAgICAgY3R4LmZpbGxUZXh0KHAueU1heC50b0ZpeGVkKDEpLCBib3gueCAtIDYsIGJveC55ICsgMTApO1xuICAgICAgY3R4LmZpbGxUZXh0KFwiMC4wXCIsIGJveC54IC0gNiwgYm94LnkgKyBib3guaCk7XG5cbiAgICAgIGRyYXdTZXJpZXMoYm94LCBkYXRhLnQsIHAuc2VyaWVzWzBdLCBpZHgsIHAueU1pbiwgcC55TWF4LCBOQVZZLCB0cnVlKTtcbiAgICAgIGRyYXdTZXJpZXMoYm94LCBkYXRhLnQsIHAuc2VyaWVzWzFdLCBpZHgsIHAueU1pbiwgcC55TWF4LCBOQVZZLCBmYWxzZSk7XG4gICAgICBkcmF3U2VyaWVzKGJveCwgZGF0YS50LCBwLnNlcmllc1syXSwgaWR4LCBwLnlNaW4sIHAueU1heCwgR09MRCwgZmFsc2UpO1xuXG4gICAgICBpZiAocElkeCA9PT0gMCkge3tcbiAgICAgICAgY3R4LmZvbnQgPSBcIjEwLjVweCBzYW5zLXNlcmlmXCI7XG4gICAgICAgIGN0eC50ZXh0QWxpZ24gPSBcInJpZ2h0XCI7XG4gICAgICAgIGN0eC5maWxsU3R5bGUgPSBOQVZZOyBjdHguZmlsbFRleHQoXCItLSBWYWN1dW0gKEJvdGgpICAg4oCUIEhhbW1lciAoQWlyKVwiLCBib3gueCArIGJveC53IC0gOCwgYm94LnkgKyAxNSk7XG4gICAgICAgIGN0eC5maWxsU3R5bGUgPSBHT0xEOyBjdHguZmlsbFRleHQoXCLigJQgRmVhdGhlciAoQWlyKVwiLCBib3gueCArIGJveC53IC0gOCwgYm94LnkgKyAzMCk7XG4gICAgICB9fVxuICAgICAgaWYgKHBJZHggPT09IDIpIHt7XG4gICAgICAgIGN0eC5maWxsU3R5bGUgPSBOQVZZO1xuICAgICAgICBjdHguZm9udCA9IFwiYm9sZCAxMS41cHggc2Fucy1zZXJpZlwiO1xuICAgICAgICBjdHgudGV4dEFsaWduID0gXCJjZW50ZXJcIjtcbiAgICAgICAgY3R4LmZpbGxUZXh0KGBUaW1lIHQgKDAgdG8gJHt7ZGF0YS5UX01BWC50b0ZpeGVkKDApfX0gcylgLCBib3gueCArIGJveC53IC8gMiwgYm94LnkgKyBib3guaCArIDIyKTtcbiAgICAgIH19XG4gICAgfX0pO1xuXG4gICAgY2xvY2tMYWJlbC50ZXh0Q29udGVudCA9IGB0ID0gJHt7ZGF0YS50W2lkeF0udG9GaXhlZCgyKS5wYWRTdGFydCg1LCBcIiBcIil9fSBzICgxLjDDlyBSZWFsLVRpbWUpYDtcbiAgICBzY3J1Yi52YWx1ZSA9IGlkeDtcbiAgfX1cblxuICBmdW5jdGlvbiB0aWNrKG5vdykge3tcbiAgICBpZiAoIXBsYXlpbmcpIHJldHVybjtcbiAgICBpZiAobGFzdFdhbGwgIT09IG51bGwpIHt7XG4gICAgICBzaW1UaW1lICs9IChub3cgLSBsYXN0V2FsbCkgLyAxMDAwLjA7XG4gICAgfX1cbiAgICBsYXN0V2FsbCA9IG5vdztcblxuICAgIGlmIChzaW1UaW1lID49IGRhdGEuVF9NQVgpIHt7XG4gICAgICBzaW1UaW1lID0gZGF0YS5UX01BWDtcbiAgICAgIHJlbmRlckZyYW1lKE4gLSAxKTtcbiAgICAgIHBsYXlpbmcgPSBmYWxzZTtcbiAgICAgIGJ0blBsYXkudGV4dENvbnRlbnQgPSBcIlBsYXlcIjtcbiAgICAgIGxhc3RXYWxsID0gbnVsbDtcbiAgICAgIHJldHVybjtcbiAgICB9fVxuXG4gICAgY29uc3QgaWR4ID0gTWF0aC5taW4oTiAtIDEsIE1hdGgucm91bmQoKHNpbVRpbWUgLyBkYXRhLlRfTUFYKSAqIChOIC0gMSkpKTtcbiAgICByZW5kZXJGcmFtZShpZHgpO1xuICAgIHJlcXVlc3RBbmltYXRpb25GcmFtZSh0aWNrKTtcbiAgfX1cblxuICBidG5QbGF5LmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCAoKSA9PiB7e1xuICAgIGlmIChwbGF5aW5nKSB7e1xuICAgICAgcGxheWluZyA9IGZhbHNlO1xuICAgICAgYnRuUGxheS50ZXh0Q29udGVudCA9IFwiUGxheVwiO1xuICAgICAgbGFzdFdhbGwgPSBudWxsO1xuICAgIH19IGVsc2Uge3tcbiAgICAgIGlmIChzaW1UaW1lID49IGRhdGEuVF9NQVgpIHNpbVRpbWUgPSAwLjA7XG4gICAgICBwbGF5aW5nID0gdHJ1ZTtcbiAgICAgIGJ0blBsYXkudGV4dENvbnRlbnQgPSBcIlBhdXNlXCI7XG4gICAgICBsYXN0V2FsbCA9IG51bGw7XG4gICAgICByZXF1ZXN0QW5pbWF0aW9uRnJhbWUodGljayk7XG4gICAgfX1cbiAgfX0pO1xuXG4gIGJ0blJlc2V0LmFkZEV2ZW50TGlzdGVuZXIoXCJjbGlja1wiLCAoKSA9PiB7e1xuICAgIHBsYXlpbmcgPSBmYWxzZTtcbiAgICBidG5QbGF5LnRleHRDb250ZW50ID0gXCJQbGF5XCI7XG4gICAgbGFzdFdhbGwgPSBudWxsO1xuICAgIHNpbVRpbWUgPSAwLjA7XG4gICAgcmVuZGVyRnJhbWUoMCk7XG4gIH19KTtcblxuICBzY3J1Yi5hZGRFdmVudExpc3RlbmVyKFwiaW5wdXRcIiwgKCkgPT4ge3tcbiAgICBwbGF5aW5nID0gZmFsc2U7XG4gICAgYnRuUGxheS50ZXh0Q29udGVudCA9IFwiUGxheVwiO1xuICAgIGxhc3RXYWxsID0gbnVsbDtcbiAgICBjb25zdCBpZHggPSBwYXJzZUludChzY3J1Yi52YWx1ZSwgMTApO1xuICAgIHNpbVRpbWUgPSBkYXRhLnRbaWR4XTtcbiAgICByZW5kZXJGcmFtZShpZHgpO1xuICB9fSk7XG5cbiAgcmVuZGVyRnJhbWUoMCk7XG59fSkoKTtcbjwvc2NyaXB0PlxuXCJcIlwiXG5cbkhUTUwoaHRtbF93aWRnZXQpIn0=
+</script>
+</div>
+<hr>
+</section>
+<section id="python-source-code-run-on-your-own-computer" class="level2">
+<h2 class="anchored" data-anchor-id="python-source-code-run-on-your-own-computer">4. Python Source Code (Run on Your Own Computer)</h2>
+<p>Below is the <strong>exact, self-contained Python script</strong> available for download. You can copy it directly or download the file to run and modify it in VS Code, PyCharm, or IDLE (requires only <code>numpy</code> and <code>matplotlib</code>):</p>
+<ul>
+<li><a href="../downloads/01_leaning_tower_of_pisa.py"><strong>Download <code>01_leaning_tower_of_pisa.py</code></strong></a></li>
+</ul>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">In Silico Physics Lab — Experiment 01: The Leaning Tower of Pisa</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">Self-contained 1:1 real-time simulation of a falling hammer and feather.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co">Requirements:</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">    pip install numpy matplotlib</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="co">"""</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.animation <span class="im">import</span> FuncAnimation</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Physical Constants &amp; Object Properties (Edit these to experiment!)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>TOWER_HEIGHT <span class="op">=</span> <span class="fl">56.0</span>      <span class="co"># m</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>GRAVITY <span class="op">=</span> <span class="fl">9.81</span>           <span class="co"># m/s^2 (Earth: 9.81, Moon: 1.62, Mars: 3.72)</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>AIR_DENSITY <span class="op">=</span> <span class="fl">1.225</span>      <span class="co"># kg/m^3</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>HAMMER <span class="op">=</span> {<span class="st">"mass"</span>: <span class="fl">1.50</span>, <span class="st">"area"</span>: <span class="fl">0.008</span>, <span class="st">"cd"</span>: <span class="fl">0.80</span>}</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>FEATHER <span class="op">=</span> {<span class="st">"mass"</span>: <span class="fl">0.002</span>, <span class="st">"area"</span>: <span class="fl">0.004</span>, <span class="st">"cd"</span>: <span class="fl">1.20</span>}</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>DT <span class="op">=</span> <span class="fl">0.01</span>                <span class="co"># Numerical time step (s)</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>FPS <span class="op">=</span> <span class="dv">20</span>                 <span class="co"># Playback frame rate (20 FPS = 50 ms per frame)</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Automatically estimate enough simulation time for the feather to land</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>v_term_feather <span class="op">=</span> np.sqrt(</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    <span class="fl">2.0</span> <span class="op">*</span> FEATHER[<span class="st">"mass"</span>] <span class="op">*</span> GRAVITY <span class="op">/</span> (AIR_DENSITY <span class="op">*</span> FEATHER[<span class="st">"cd"</span>] <span class="op">*</span> FEATHER[<span class="st">"area"</span>])</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>T_MAX <span class="op">=</span> <span class="bu">float</span>(</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    np.ceil(np.sqrt(<span class="fl">2.0</span> <span class="op">*</span> TOWER_HEIGHT <span class="op">/</span> GRAVITY) <span class="op">+</span> (TOWER_HEIGHT <span class="op">/</span> v_term_feather) <span class="op">+</span> <span class="fl">1.0</span>)</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulate_fall(mass: <span class="bu">float</span>, area: <span class="bu">float</span>, cd: <span class="bu">float</span>, rho: <span class="bu">float</span>) <span class="op">-&gt;</span> <span class="bu">dict</span>:</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""Integrate Newton's 2nd Law (F_net = m*g - F_drag) via Euler-Cromer."""</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>    steps <span class="op">=</span> <span class="bu">int</span>(np.ceil(T_MAX <span class="op">/</span> DT)) <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> np.linspace(<span class="fl">0.0</span>, (steps <span class="op">-</span> <span class="dv">1</span>) <span class="op">*</span> DT, steps)</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    y <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    v <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    a <span class="op">=</span> np.zeros(steps)</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    y[<span class="dv">0</span>] <span class="op">=</span> TOWER_HEIGHT</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    a[<span class="dv">0</span>] <span class="op">=</span> GRAVITY</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    drag_k <span class="op">=</span> <span class="fl">0.5</span> <span class="op">*</span> rho <span class="op">*</span> cd <span class="op">*</span> area <span class="op">/</span> mass</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(steps <span class="op">-</span> <span class="dv">1</span>):</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> y[i] <span class="op">&lt;=</span> <span class="fl">0.0</span>:</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>            y[i <span class="op">+</span> <span class="dv">1</span>], v[i <span class="op">+</span> <span class="dv">1</span>], a[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span></span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">continue</span></span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>        a_curr <span class="op">=</span> GRAVITY <span class="op">-</span> drag_k <span class="op">*</span> (v[i] <span class="op">**</span> <span class="dv">2</span>)</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>        a[i] <span class="op">=</span> a_curr</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>        v_next <span class="op">=</span> v[i] <span class="op">+</span> a_curr <span class="op">*</span> DT</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>        y_next <span class="op">=</span> y[i] <span class="op">-</span> v_next <span class="op">*</span> DT</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> y_next <span class="op">&lt;=</span> <span class="fl">0.0</span>:</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>            y[i <span class="op">+</span> <span class="dv">1</span>], v[i <span class="op">+</span> <span class="dv">1</span>], a[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> <span class="fl">0.0</span>, <span class="fl">0.0</span>, <span class="fl">0.0</span></span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span>:</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>            y[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> y_next</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>            v[i <span class="op">+</span> <span class="dv">1</span>] <span class="op">=</span> v_next</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> {<span class="st">"t"</span>: t, <span class="st">"y"</span>: y, <span class="st">"d"</span>: TOWER_HEIGHT <span class="op">-</span> y, <span class="st">"v"</span>: v, <span class="st">"a"</span>: a}</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">"__main__"</span>:</span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>    ham_vac <span class="op">=</span> simulate_fall(HAMMER[<span class="st">"mass"</span>], HAMMER[<span class="st">"area"</span>], <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>    fea_vac <span class="op">=</span> simulate_fall(FEATHER[<span class="st">"mass"</span>], FEATHER[<span class="st">"area"</span>], <span class="fl">0.0</span>, <span class="fl">0.0</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>    ham_air <span class="op">=</span> simulate_fall(HAMMER[<span class="st">"mass"</span>], HAMMER[<span class="st">"area"</span>], HAMMER[<span class="st">"cd"</span>], AIR_DENSITY)</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>    fea_air <span class="op">=</span> simulate_fall(FEATHER[<span class="st">"mass"</span>], FEATHER[<span class="st">"area"</span>], FEATHER[<span class="st">"cd"</span>], AIR_DENSITY)</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>    fig, (ax_drop, ax_vel) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">10</span>, <span class="dv">5</span>))</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_xlim(<span class="dv">0</span>, <span class="dv">4</span>)</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_ylim(<span class="dv">0</span>, TOWER_HEIGHT <span class="op">*</span> <span class="fl">1.14</span>)</span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>    ax_drop.axvline(<span class="fl">2.0</span>, color<span class="op">=</span><span class="st">"gray"</span>, linestyle<span class="op">=</span><span class="st">"--"</span>)</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_xticks([<span class="fl">1.0</span>, <span class="fl">3.0</span>])</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_xticklabels([<span class="st">"Vacuum"</span>, <span class="st">"Atmosphere"</span>])</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_ylabel(<span class="st">"Altitude (m)"</span>)</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>    ax_drop.set_title(<span class="ss">f"Leaning Tower of Pisa Drop (</span><span class="sc">{</span>TOWER_HEIGHT<span class="sc">:.0f}</span><span class="ss"> m)"</span>)</span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>    p_hv, <span class="op">=</span> ax_drop.plot([<span class="fl">0.7</span>], [TOWER_HEIGHT], <span class="st">"s"</span>, markersize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">"#0B1F3A"</span>, label<span class="op">=</span><span class="st">"Hammer"</span>)</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>    p_fv, <span class="op">=</span> ax_drop.plot([<span class="fl">1.3</span>], [TOWER_HEIGHT], <span class="st">"^"</span>, markersize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">"#1C939A"</span>, label<span class="op">=</span><span class="st">"Feather (Vacuum)"</span>)</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>    p_ha, <span class="op">=</span> ax_drop.plot([<span class="fl">2.7</span>], [TOWER_HEIGHT], <span class="st">"s"</span>, markersize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">"#0B1F3A"</span>)</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>    p_fa, <span class="op">=</span> ax_drop.plot([<span class="fl">3.3</span>], [TOWER_HEIGHT], <span class="st">"^"</span>, markersize<span class="op">=</span><span class="dv">11</span>, color<span class="op">=</span><span class="st">"#D97706"</span>, label<span class="op">=</span><span class="st">"Feather (Air)"</span>)</span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>    time_badge <span class="op">=</span> ax_drop.text(</span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>        <span class="fl">2.0</span>, TOWER_HEIGHT <span class="op">*</span> <span class="fl">1.06</span>, <span class="st">"t =  0.00 s (1.0× Real-Time)"</span>,</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>        ha<span class="op">=</span><span class="st">"center"</span>, va<span class="op">=</span><span class="st">"center"</span>, fontsize<span class="op">=</span><span class="fl">9.5</span>, fontweight<span class="op">=</span><span class="st">"bold"</span>, color<span class="op">=</span><span class="st">"white"</span>,</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">"round,pad=0.3"</span>, facecolor<span class="op">=</span><span class="st">"#0B1F3A"</span>, edgecolor<span class="op">=</span><span class="st">"none"</span>),</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>    ax_drop.legend(loc<span class="op">=</span><span class="st">"lower center"</span>)</span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> ham_vac[<span class="st">"t"</span>]</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>    ax_vel.set_xlim(<span class="dv">0</span>, T_MAX)</span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>    ax_vel.set_ylim(<span class="dv">0</span>, np.<span class="bu">max</span>(ham_vac[<span class="st">"v"</span>]) <span class="op">*</span> <span class="fl">1.15</span>)</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>    ax_vel.set_xlabel(<span class="st">"Time (s)"</span>)</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>    ax_vel.set_ylabel(<span class="st">"Downward Speed (m/s)"</span>)</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>    ax_vel.set_title(<span class="st">"Velocity vs. Time"</span>)</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>    ax_vel.grid(<span class="va">True</span>, linestyle<span class="op">=</span><span class="st">"--"</span>, alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>    l_vac, <span class="op">=</span> ax_vel.plot([], [], <span class="st">"--"</span>, color<span class="op">=</span><span class="st">"#0B1F3A"</span>, label<span class="op">=</span><span class="st">"Vacuum (Both)"</span>)</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>    l_ha, <span class="op">=</span> ax_vel.plot([], [], <span class="st">"-"</span>, color<span class="op">=</span><span class="st">"#0B1F3A"</span>, label<span class="op">=</span><span class="st">"Hammer (Air)"</span>)</span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>    l_fa, <span class="op">=</span> ax_vel.plot([], [], <span class="st">"-"</span>, color<span class="op">=</span><span class="st">"#D97706"</span>, label<span class="op">=</span><span class="st">"Feather (Air)"</span>)</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>    ax_vel.legend()</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a>    fig.tight_layout()</span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Lock frame stride and interval to 1:1 real-time (20 FPS -&gt; 50 ms per 0.05 s step)</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>    step_stride <span class="op">=</span> <span class="bu">max</span>(<span class="dv">1</span>, <span class="bu">int</span>(<span class="bu">round</span>(<span class="fl">1.0</span> <span class="op">/</span> (FPS <span class="op">*</span> DT))))</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    interval_ms <span class="op">=</span> <span class="bu">int</span>(<span class="bu">round</span>(step_stride <span class="op">*</span> DT <span class="op">*</span> <span class="dv">1000</span>))</span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    frames <span class="op">=</span> np.arange(<span class="dv">0</span>, <span class="bu">len</span>(t), step_stride)</span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> animate(idx):</span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>        p_hv.set_data([<span class="fl">0.7</span>], [ham_vac[<span class="st">"y"</span>][idx]])</span>
+<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>        p_fv.set_data([<span class="fl">1.3</span>], [fea_vac[<span class="st">"y"</span>][idx]])</span>
+<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>        p_ha.set_data([<span class="fl">2.7</span>], [ham_air[<span class="st">"y"</span>][idx]])</span>
+<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>        p_fa.set_data([<span class="fl">3.3</span>], [fea_air[<span class="st">"y"</span>][idx]])</span>
+<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a>        time_badge.set_text(<span class="ss">f"t = </span><span class="sc">{</span>t[idx]<span class="sc">:5.2f}</span><span class="ss"> s (1.0× Real-Time)"</span>)</span>
+<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>        l_vac.set_data(t[: idx <span class="op">+</span> <span class="dv">1</span>], ham_vac[<span class="st">"v"</span>][: idx <span class="op">+</span> <span class="dv">1</span>])</span>
+<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>        l_ha.set_data(t[: idx <span class="op">+</span> <span class="dv">1</span>], ham_air[<span class="st">"v"</span>][: idx <span class="op">+</span> <span class="dv">1</span>])</span>
+<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>        l_fa.set_data(t[: idx <span class="op">+</span> <span class="dv">1</span>], fea_air[<span class="st">"v"</span>][: idx <span class="op">+</span> <span class="dv">1</span>])</span>
+<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> p_hv, p_fv, p_ha, p_fa, time_badge, l_vac, l_ha, l_fa</span>
+<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-121"><a href="#cb2-121" aria-hidden="true" tabindex="-1"></a>    ani <span class="op">=</span> FuncAnimation(fig, animate, frames<span class="op">=</span>frames, interval<span class="op">=</span>interval_ms, blit<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb2-122"><a href="#cb2-122" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+
+<script type="pyodide-data">
+eyJvcHRpb25zIjp7ImVudiI6eyJQTE9UTFlfUkVOREVSRVIiOiJwbG90bHlfbWltZXR5cGUifSwiaW5kZXhVUkwiOiJodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvcHlvZGlkZS92MC4yOC4xL2Z1bGwvIn0sInBhY2thZ2VzIjp7InBrZ3MiOlsicHlvZGlkZV9odHRwIiwibWljcm9waXAiLCJpcHl0aG9uIiwibnVtcHkiLCJtYXRwbG90bGliIl19fQ==
+</script>
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3siY2VsbE5hbWUiOiJweW9kaWRlLTEiLCJpbmxpbmUiOmZhbHNlLCJtZXRob2ROYW1lIjoiaW50ZXJwcmV0Iiwic291cmNlIjoiX3B5b2RpZGVfdmFsdWVfMSA9IHtcbiAgY29uc3QgeyBoaWdobGlnaHRQeXRob24sIGI2NERlY29kZX0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHNjcmlwdENvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwicHlvZGlkZS0xLWNvbnRlbnRzXFxcIl1gKS50ZXh0Q29udGVudDtcbiAgY29uc3QgYmxvY2sgPSBKU09OLnBhcnNlKGI2NERlY29kZShzY3JpcHRDb250ZW50KSk7XG5cbiAgLy8gRGVmYXVsdCBldmFsdWF0aW9uIGNvbmZpZ3VyYXRpb25cbiAgY29uc3Qgb3B0aW9ucyA9IE9iamVjdC5hc3NpZ24oe1xuICAgIGlkOiBcInB5b2RpZGUtMS1jb250ZW50c1wiLFxuICAgIGVjaG86IHRydWUsXG4gICAgb3V0cHV0OiB0cnVlXG4gIH0sIGJsb2NrLmF0dHIpO1xuXG4gIC8vIEV2YWx1YXRlIHRoZSBwcm92aWRlZCBQeXRob24gY29kZVxuICBjb25zdCByZXN1bHQgPSBweW9kaWRlT2pzLnByb2Nlc3Moe2NvZGU6IGJsb2NrLmNvZGUsIG9wdGlvbnN9LCB7dG93ZXJfaGVpZ2h0LCBoYW1tZXJfbWFzcywgZmVhdGhlcl9tYXNzLCBncmF2aXR5fSk7XG5cbiAgLy8gRWFybHkgeWllbGQgd2hpbGUgd2Ugd2FpdCBmb3IgdGhlIGZpcnN0IGV2YWx1YXRpb24gYW5kIHJlbmRlclxuICBpZiAob3B0aW9ucy5vdXRwdXQgJiYgIShcIjFcIiBpbiBweW9kaWRlT2pzLnJlbmRlcmVkT2pzKSkge1xuICAgIGNvbnN0IGNvbnRhaW5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG4gICAgY29uc3Qgc3Bpbm5lciA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoXCJkaXZcIik7XG5cbiAgICBpZiAob3B0aW9ucy5lY2hvKSB7XG4gICAgICAvLyBTaG93IG91dHB1dCBhcyBoaWdobGlnaHRlZCBzb3VyY2VcbiAgICAgIGNvbnN0IHByZUVsZW0gPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KFwicHJlXCIpO1xuICAgICAgY29udGFpbmVyLmNsYXNzTmFtZSA9IFwic291cmNlQ29kZVwiO1xuICAgICAgcHJlRWxlbS5jbGFzc05hbWUgPSBcInNvdXJjZUNvZGUgcHl0aG9uXCI7XG4gICAgICBwcmVFbGVtLmFwcGVuZENoaWxkKGhpZ2hsaWdodFB5dGhvbihibG9jay5jb2RlKSk7XG4gICAgICBzcGlubmVyLmNsYXNzTmFtZSA9IFwic3Bpbm5lci1ncm93IHNwaW5uZXItZ3Jvdy1zbSBtLTIgcG9zaXRpb24tYWJzb2x1dGUgdG9wLTAgZW5kLTBcIjtcbiAgICAgIHByZUVsZW0uYXBwZW5kQ2hpbGQoc3Bpbm5lcik7XG4gICAgICBjb250YWluZXIuYXBwZW5kQ2hpbGQocHJlRWxlbSk7XG4gICAgfSBlbHNlIHtcbiAgICAgIHNwaW5uZXIuY2xhc3NOYW1lID0gXCJzcGlubmVyLWJvcmRlciBzcGlubmVyLWJvcmRlci1zbVwiO1xuICAgICAgY29udGFpbmVyLmFwcGVuZENoaWxkKHNwaW5uZXIpO1xuICAgIH1cblxuICAgIHlpZWxkIGNvbnRhaW5lcjtcbiAgfVxuXG4gIHB5b2RpZGVPanMucmVuZGVyZWRPanNbXCIxXCJdID0gdHJ1ZTtcbiAgeWllbGQgYXdhaXQgcmVzdWx0O1xufVxuIn0seyJjZWxsTmFtZSI6InB5b2RpZGUtcHJlbHVkZSIsImlubGluZSI6ZmFsc2UsIm1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InB5b2RpZGVPanMgPSB7XG4gIGNvbnN0IHtcbiAgICBQeW9kaWRlRXZhbHVhdG9yLFxuICAgIFB5b2RpZGVFbnZpcm9ubWVudE1hbmFnZXIsXG4gICAgc2V0dXBQeXRob24sXG4gICAgc3RhcnRQeW9kaWRlV29ya2VyLFxuICAgIGI2NERlY29kZSxcbiAgICBjb2xsYXBzZVBhdGgsXG4gIH0gPSB3aW5kb3cuX2V4ZXJjaXNlX29qc19ydW50aW1lO1xuXG4gIGNvbnN0IHN0YXR1c0NvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1zdGF0dXNcIik7XG4gIGNvbnN0IGluZGljYXRvckNvbnRhaW5lciA9IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKFwiZXhlcmNpc2UtbG9hZGluZy1pbmRpY2F0b3JcIik7XG4gIGluZGljYXRvckNvbnRhaW5lci5jbGFzc0xpc3QucmVtb3ZlKFwiZC1ub25lXCIpO1xuXG4gIGxldCBzdGF0dXNUZXh0ID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudChcImRpdlwiKVxuICBzdGF0dXNUZXh0LmNsYXNzTGlzdCA9IFwiZXhlcmNpc2UtbG9hZGluZy1kZXRhaWxzXCI7XG4gIHN0YXR1c1RleHQgPSBzdGF0dXNDb250YWluZXIuYXBwZW5kQ2hpbGQoc3RhdHVzVGV4dCk7XG4gIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgSW5pdGlhbGlzZWA7XG5cbiAgLy8gSG9pc3QgaW5kaWNhdG9yIG91dCBmcm9tIGZpbmFsIHNsaWRlIHdoZW4gcnVubmluZyB1bmRlciByZXZlYWxcbiAgY29uc3QgcmV2ZWFsU3RhdHVzID0gZG9jdW1lbnQucXVlcnlTZWxlY3RvcihcIi5yZXZlYWwgLmV4ZXJjaXNlLWxvYWRpbmctaW5kaWNhdG9yXCIpO1xuICBpZiAocmV2ZWFsU3RhdHVzKSB7XG4gICAgcmV2ZWFsU3RhdHVzLnJlbW92ZSgpO1xuICAgIGRvY3VtZW50LnF1ZXJ5U2VsZWN0b3IoXCIucmV2ZWFsID4gLnNsaWRlc1wiKS5hcHBlbmRDaGlsZChyZXZlYWxTdGF0dXMpO1xuICB9XG5cbiAgLy8gTWFrZSBhbnkgcmV2ZWFsIHNsaWRlcyB3aXRoIGxpdmUgY2VsbHMgc2Nyb2xsYWJsZVxuICBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKFwiLnJldmVhbCAuZXhlcmNpc2UtY2VsbFwiKS5mb3JFYWNoKChlbCkgPT4ge1xuICAgIGVsLmNsb3Nlc3QoJ3NlY3Rpb24uc2xpZGUnKS5jbGFzc0xpc3QuYWRkKFwic2Nyb2xsYWJsZVwiKTtcbiAgfSlcblxuICAvLyBQeW9kaWRlIHN1cHBsZW1lbnRhbCBkYXRhIGFuZCBvcHRpb25zXG4gIGNvbnN0IGRhdGFDb250ZW50ID0gZG9jdW1lbnQucXVlcnlTZWxlY3Rvcihgc2NyaXB0W3R5cGU9XFxcInB5b2RpZGUtZGF0YVxcXCJdYCkudGV4dENvbnRlbnQ7XG4gIGNvbnN0IGRhdGEgPSBKU09OLnBhcnNlKGI2NERlY29kZShkYXRhQ29udGVudCkpO1xuXG4gIC8vIEdyYWIgbGlzdCBvZiByZXNvdXJjZXMgdG8gYmUgZG93bmxvYWRlZFxuICBjb25zdCBmaWxlc0NvbnRlbnQgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yKGBzY3JpcHRbdHlwZT1cXFwidmZzLWZpbGVcXFwiXWApLnRleHRDb250ZW50O1xuICBjb25zdCBmaWxlcyA9IEpTT04ucGFyc2UoYjY0RGVjb2RlKGZpbGVzQ29udGVudCkpO1xuXG4gIGxldCBweW9kaWRlUHJvbWlzZSA9IChhc3luYyAoKSA9PiB7XG4gICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyBQeW9kaWRlYDtcbiAgICBjb25zdCBweW9kaWRlID0gYXdhaXQgc3RhcnRQeW9kaWRlV29ya2VyKGRhdGEub3B0aW9ucyk7XG5cbiAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6IG1pY3JvcGlwYDtcbiAgICBhd2FpdCBweW9kaWRlLmxvYWRQYWNrYWdlKFwibWljcm9waXBcIik7XG4gICAgY29uc3QgbWljcm9waXAgPSBhd2FpdCBweW9kaWRlLnB5aW1wb3J0KFwibWljcm9waXBcIik7XG4gICAgYXdhaXQgZGF0YS5wYWNrYWdlcy5wa2dzLm1hcCgocGtnKSA9PiAoKSA9PiB7XG4gICAgICBzdGF0dXNUZXh0LnRleHRDb250ZW50ID0gYERvd25sb2FkaW5nIHBhY2thZ2U6ICR7cGtnfWA7XG4gICAgICByZXR1cm4gbWljcm9waXAuaW5zdGFsbChwa2cpO1xuICAgIH0pLnJlZHVjZSgoY3VyLCBuZXh0KSA9PiBjdXIudGhlbihuZXh0KSwgUHJvbWlzZS5yZXNvbHZlKCkpO1xuICAgIGF3YWl0IG1pY3JvcGlwLmRlc3Ryb3koKTtcblxuICAgIC8vIERvd25sb2FkIGFuZCBpbnN0YWxsIHJlc291cmNlc1xuICAgIGF3YWl0IGZpbGVzLm1hcCgoZmlsZSkgPT4gYXN5bmMgKCkgPT4ge1xuICAgICAgY29uc3QgbmFtZSA9IGZpbGUuc3Vic3RyaW5nKGZpbGUubGFzdEluZGV4T2YoJy8nKSArIDEpO1xuICAgICAgc3RhdHVzVGV4dC50ZXh0Q29udGVudCA9IGBEb3dubG9hZGluZyByZXNvdXJjZTogJHtuYW1lfWA7XG4gICAgICBjb25zdCByZXNwb25zZSA9IGF3YWl0IGZldGNoKGZpbGUpO1xuICAgICAgaWYgKCFyZXNwb25zZS5vaykge1xuICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYENhbid0IGRvd25sb2FkIFxcYCR7ZmlsZX1cXGAuIEVycm9yICR7cmVzcG9uc2Uuc3RhdHVzfTogXCIke3Jlc3BvbnNlLnN0YXR1c1RleHR9XCIuYCk7XG4gICAgICB9XG4gICAgICBjb25zdCBkYXRhID0gYXdhaXQgcmVzcG9uc2UuYXJyYXlCdWZmZXIoKTtcblxuICAgICAgLy8gU3RvcmUgVVJMcyBpbiB0aGUgY3dkIHdpdGhvdXQgYW55IHN1YmRpcmVjdG9yeSBzdHJ1Y3R1cmVcbiAgICAgIGlmIChmaWxlLmluY2x1ZGVzKFwiOi8vXCIpKSB7XG4gICAgICAgIGZpbGUgPSBuYW1lO1xuICAgICAgfVxuXG4gICAgICAvLyBDb2xsYXBzZSBoaWdoZXIgZGlyZWN0b3J5IHN0cnVjdHVyZVxuICAgICAgZmlsZSA9IGNvbGxhcHNlUGF0aChmaWxlKTtcblxuICAgICAgLy8gQ3JlYXRlIGRpcmVjdG9yeSB0cmVlLCBpZ25vcmluZyBcImRpcmVjdG9yeSBleGlzdHNcIiBWRlMgZXJyb3JzXG4gICAgICBjb25zdCBwYXJ0cyA9IGZpbGUuc3BsaXQoJy8nKS5zbGljZSgwLCAtMSk7XG4gICAgICBsZXQgcGF0aCA9ICcnO1xuICAgICAgd2hpbGUgKHBhcnRzLmxlbmd0aCA+IDApIHtcbiAgICAgICAgcGF0aCArPSBwYXJ0cy5zaGlmdCgpICsgJy8nO1xuICAgICAgICB0cnkge1xuICAgICAgICAgIGF3YWl0IHB5b2RpZGUuRlMubWtkaXIocGF0aCk7XG4gICAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgICBpZiAoZS5uYW1lICE9PSBcIkVycm5vRXJyb3JcIikgdGhyb3cgZTtcbiAgICAgICAgICBpZiAoZS5lcnJubyAhPT0gMjApIHtcbiAgICAgICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgICAgICBjb25zdCBlcnJvclRleHQgPSBhd2FpdCBweW9kaWRlLl9tb2R1bGUuVVRGOFRvU3RyaW5nKGVycm9yVGV4dFB0cik7XG4gICAgICAgICAgICB0aHJvdyBuZXcgRXJyb3IoYEZpbGVzeXN0ZW0gRXJyb3IgJHtlLmVycm5vfSBcIiR7ZXJyb3JUZXh0fVwiLmApO1xuICAgICAgICAgIH1cbiAgICAgICAgfVxuICAgICAgfVxuXG4gICAgICAvLyBXcml0ZSB0aGlzIGZpbGUgdG8gdGhlIFZGU1xuICAgICAgdHJ5IHtcbiAgICAgICAgcmV0dXJuIGF3YWl0IHB5b2RpZGUuRlMud3JpdGVGaWxlKGZpbGUsIG5ldyBVaW50OEFycmF5KGRhdGEpKTtcbiAgICAgIH0gY2F0Y2ggKGUpIHtcbiAgICAgICAgaWYgKGUubmFtZSAhPT0gXCJFcnJub0Vycm9yXCIpIHRocm93IGU7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dFB0ciA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5fc3RyZXJyb3IoZS5lcnJubyk7XG4gICAgICAgIGNvbnN0IGVycm9yVGV4dCA9IGF3YWl0IHB5b2RpZGUuX21vZHVsZS5VVEY4VG9TdHJpbmcoZXJyb3JUZXh0UHRyKTtcbiAgICAgICAgdGhyb3cgbmV3IEVycm9yKGBGaWxlc3lzdGVtIEVycm9yICR7ZS5lcnJub30gXCIke2Vycm9yVGV4dH1cIi5gKTtcbiAgICAgIH1cbiAgICB9KS5yZWR1Y2UoKGN1ciwgbmV4dCkgPT4gY3VyLnRoZW4obmV4dCksIFByb21pc2UucmVzb2x2ZSgpKTtcblxuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBgUHlvZGlkZSBlbnZpcm9ubWVudCBzZXR1cGA7XG4gICAgYXdhaXQgc2V0dXBQeXRob24ocHlvZGlkZSk7XG5cbiAgICBzdGF0dXNUZXh0LnJlbW92ZSgpO1xuICAgIGlmIChzdGF0dXNDb250YWluZXIuY2hpbGRyZW4ubGVuZ3RoID09IDApIHtcbiAgICAgIHN0YXR1c0NvbnRhaW5lci5wYXJlbnROb2RlLnJlbW92ZSgpO1xuICAgIH1cbiAgICByZXR1cm4gcHlvZGlkZTtcbiAgfSkoKS5jYXRjaCgoZXJyKSA9PiB7XG4gICAgc3RhdHVzVGV4dC5zdHlsZS5jb2xvciA9IFwidmFyKC0tZXhlcmNpc2UtZWRpdG9yLWhsLWVyLCAjQUQwMDAwKVwiO1xuICAgIHN0YXR1c1RleHQudGV4dENvbnRlbnQgPSBlcnIubWVzc2FnZTtcbiAgICAvL2luZGljYXRvckNvbnRhaW5lci5xdWVyeVNlbGVjdG9yKFwiLnNwaW5uZXItZ3Jvd1wiKS5jbGFzc0xpc3QuYWRkKFwiZC1ub25lXCIpO1xuICAgIHRocm93IGVycjtcbiAgfSk7XG5cbiAgLy8gS2VlcCB0cmFjayBvZiBpbml0aWFsIE9KUyBibG9jayByZW5kZXJcbiAgY29uc3QgcmVuZGVyZWRPanMgPSB7fTtcblxuICBjb25zdCBwcm9jZXNzID0gYXN5bmMgKGNvbnRleHQsIGlucHV0cykgPT4ge1xuICAgIGNvbnN0IHB5b2RpZGUgPSBhd2FpdCBweW9kaWRlUHJvbWlzZTtcbiAgICBjb25zdCBldmFsdWF0b3IgPSBuZXcgUHlvZGlkZUV2YWx1YXRvcihweW9kaWRlLCBjb250ZXh0KTtcbiAgICBhd2FpdCBldmFsdWF0b3IucHJvY2VzcyhpbnB1dHMpO1xuICAgIHJldHVybiBldmFsdWF0b3IuY29udGFpbmVyO1xuICB9XG5cbiAgcmV0dXJuIHtcbiAgICBweW9kaWRlUHJvbWlzZSxcbiAgICByZW5kZXJlZE9qcyxcbiAgICBwcm9jZXNzLFxuICB9O1xufVxuIn1dfQ==
+</script>
+<div id="exercise-loading-indicator" class="exercise-loading-indicator d-none d-flex align-items-center gap-2">
+<div id="exercise-loading-status" class="d-flex gap-2">
+
+</div>
+<div class="spinner-grow spinner-grow-sm">
+
+</div>
+</div>
+<script type="vfs-file">
+WyIuLi9waHlza2l0L19faW5pdF9fLnB5IiwiLi4vcGh5c2tpdC9zdHlsZS5weSIsIi4uL3BoeXNraXQvaW50ZWdyYXRvcnMucHkiXQ==
+</script>
+</section>
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImZ1bmN0aW9uIGRlYm91bmNlKHZpZXcsIGRlbGF5ID0gMjUwKSB7XG4gIHJldHVybiBHZW5lcmF0b3JzLm9ic2VydmUobm90aWZ5ID0+IHtcbiAgICBsZXQgdGltZXIgPSBudWxsO1xuICAgIGNvbnN0IG9uSW5wdXQgPSAoKSA9PiB7XG4gICAgICBjbGVhclRpbWVvdXQodGltZXIpO1xuICAgICAgdGltZXIgPSBzZXRUaW1lb3V0KCgpID0+IG5vdGlmeSh2aWV3LnZhbHVlKSwgZGVsYXkpO1xuICAgIH07XG4gICAgdmlldy5hZGRFdmVudExpc3RlbmVyKFwiaW5wdXRcIiwgb25JbnB1dCk7XG4gICAgbm90aWZ5KHZpZXcudmFsdWUpO1xuICAgIHJldHVybiAoKSA9PiB2aWV3LnJlbW92ZUV2ZW50TGlzdGVuZXIoXCJpbnB1dFwiLCBvbklucHV0KTtcbiAgfSk7XG59XG5cbnZpZXdvZiB0b3dlcl9oZWlnaHRfdWkgPSBJbnB1dHMucmFuZ2UoWzEwLCAyNTBdLCB7dmFsdWU6IDU2LCBzdGVwOiAxLCBsYWJlbDogXCJUb3dlciBIZWlnaHQgSCAobSlcIn0pXG52aWV3b2YgaGFtbWVyX21hc3NfdWkgPSBJbnB1dHMucmFuZ2UoWzAuMiwgMTAuMF0sIHt2YWx1ZTogMS41LCBzdGVwOiAwLjEsIGxhYmVsOiBcIkhhbW1lciBNYXNzIChrZylcIn0pXG52aWV3b2YgZmVhdGhlcl9tYXNzX3VpID0gSW5wdXRzLnJhbmdlKFswLjAwMSwgMC4xMDBdLCB7dmFsdWU6IDAuMDAyLCBzdGVwOiAwLjAwMSwgbGFiZWw6IFwiRmVhdGhlciBNYXNzIChrZylcIn0pXG52aWV3b2YgZ3Jhdml0eV91aSA9IElucHV0cy5zZWxlY3QoXG4gIG5ldyBNYXAoW1xuICAgIFtcIkVhcnRoICg5LjgxIG0vc8KyKVwiLCA5LjgxXSxcbiAgICBbXCJNb29uICgxLjYyIG0vc8KyKVwiLCAxLjYyXSxcbiAgICBbXCJNYXJzICgzLjcyIG0vc8KyKVwiLCAzLjcyXVxuICBdKSxcbiAge3ZhbHVlOiA5LjgxLCBsYWJlbDogXCJHcmF2aXR5IGdcIn1cbilcblxudG93ZXJfaGVpZ2h0ID0gZGVib3VuY2Uodmlld29mIHRvd2VyX2hlaWdodF91aSwgMjUwKVxuaGFtbWVyX21hc3MgPSBkZWJvdW5jZSh2aWV3b2YgaGFtbWVyX21hc3NfdWksIDI1MClcbmZlYXRoZXJfbWFzcyA9IGRlYm91bmNlKHZpZXdvZiBmZWF0aGVyX21hc3NfdWksIDI1MClcbmdyYXZpdHkgPSBncmF2aXR5X3VpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3Rvd2VyX2hlaWdodF91aScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdoYW1tZXJfbWFzc191aScpIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdmZWF0aGVyX21hc3NfdWknKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZ3Jhdml0eV91aScpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../../experiments";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "..";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/simphyslab\.github\.io");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+      window.quartoDecorateExternalLinks = function (root) {
+     var links = (root || window.document).querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+          if (!link.classList.contains('no-external-icon')) {
+          }
+        }
+      }
+      };
+      window.quartoDecorateExternalLinks(window.document);
+    // Esc closes the popup (WCAG 1.4.13) and focus leaving both trigger and
+    // popup closes it (WCAG 2.4.11); tippy handles neither for interactive popups.
+    const hideOnEscAndFocusOut = {
+      name: 'hideOnEscAndFocusOut',
+      defaultValue: true,
+      fn(instance) {
+        const dismiss = () => {
+          // A show scheduled by the trigger delay would otherwise reopen it
+          instance.clearDelayTimeouts();
+          instance.hide();
+        };
+        const onKeyDown = (event) => {
+          if (event.key !== 'Escape') {
+            return;
+          }
+          // Keep Esc from also reaching page handlers (e.g. reveal.js overview),
+          // except an open reveal.js slide menu, which Esc should close too.
+          // The menu handles keys only when its keyboard option is on.
+          const menuHandlesEsc = window.Reveal?.getPlugin?.('menu')?.isOpen() &&
+            window.Reveal.getConfig().menu?.keyboard !== false;
+          if (!menuHandlesEsc) {
+            event.stopPropagation();
+          }
+          if (instance.popper.contains(window.document.activeElement)) {
+            // Disabled while refocusing so the focus trigger does not reopen it
+            instance.disable();
+            instance.reference.focus();
+            instance.enable();
+          }
+          dismiss();
+        };
+        const onFocusOut = (event) => {
+          const target = event.relatedTarget;
+          if (target && !instance.reference.contains(target) &&
+              !instance.popper.contains(target)) {
+            dismiss();
+          }
+        };
+        // On the trigger too: a click trigger (code-annotations: select) has no
+        // blur handling. Attached for the instance's lifetime so leaving the
+        // trigger also cancels a show still pending on the trigger delay.
+        instance.reference.addEventListener('focusout', onFocusOut);
+        return {
+          onShow() {
+            window.document.addEventListener('keydown', onKeyDown, true);
+            instance.popper.addEventListener('focusout', onFocusOut);
+          },
+          onHide() {
+            window.document.removeEventListener('keydown', onKeyDown, true);
+            instance.popper.removeEventListener('focusout', onFocusOut);
+          },
+          onDestroy() {
+            instance.reference.removeEventListener('focusout', onFocusOut);
+          },
+        };
+      },
+    };
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+        plugins: [hideOnEscAndFocusOut],
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          // Each band is positioned against its own containing block, which is
+          // not the offsetParent of the lines, so place it from client rects.
+          const placeBand = (band, firstEl, lastEl, codeBlock) => {
+            const container = band.offsetParent;
+            if (container === null) {
+              return;
+            }
+            const containerRect = container.getBoundingClientRect();
+            // Reveal.js scales slides with a transform, so convert client
+            // pixels back to the CSS pixels of the container.
+            const scale = containerRect.height / container.offsetHeight || 1;
+            const firstRect = firstEl.getBoundingClientRect();
+            const lastRect = lastEl.getBoundingClientRect();
+            const top = (firstRect.top - containerRect.top) / scale - container.clientTop + container.scrollTop;
+            const height = (lastRect.bottom - firstRect.top) / scale;
+            band.style.top = top - 2 + "px";
+            band.style.height = height + 4 + "px";
+            if (codeBlock) {
+              // Without the copy button wrapper, the containing block is wider
+              // than the code block, so span the code block explicitly.
+              const blockRect = codeBlock.getBoundingClientRect();
+              band.style.left = (blockRect.left - containerRect.left) / scale - container.clientLeft + container.scrollLeft + "px";
+              band.style.width = blockRect.width / scale + "px";
+            }
+          };
+          if (lineIds.length > 0) {
+            const el = window.document.getElementById(lineIds[0]);
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const parent = el.parentElement.parentElement;
+            // cook up a div (if necessary) and position it
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            placeBand(div, el, lastEl, parent.closest("div.sourceCode") || parent);
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            placeBand(gutterDiv, el, lastEl);
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+  <script type="application/javascript">
+  window.quartoScrollableRegionsLabels = {"code":"Scrollable code","output":"Scrollable output"};
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>
