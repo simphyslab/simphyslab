@@ -1,0 +1,38 @@
+project:
+  type: website
+
+website:
+  title: "In Silico Physics Lab"
+  description: "Interactive computational physics experiments for middle and high school students."
+  site-url: https://simphyslab.github.io
+  repo-url: https://github.com/simphyslab/simphyslab.github.io
+  navbar:
+    logo: assets/logo.png
+    background: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: experiments/01-leaning-tower-of-pisa.qmd
+        text: Experiments
+    right:
+      - icon: github
+        href: https://github.com/simphyslab/simphyslab.github.io
+        aria-label: GitHub Repository
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: "Classical Mechanics"
+        contents:
+          - text: "01. Leaning Tower of Pisa"
+            href: experiments/01-leaning-tower-of-pisa.qmd
+
+format:
+  live-html:
+    theme:
+      - cosmo
+      - styles.css
+    toc: true
+    toc-depth: 3
+    code-copy: true
+    smooth-scroll: true

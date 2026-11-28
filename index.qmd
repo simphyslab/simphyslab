@@ -1,0 +1,21 @@
+---
+title: "In Silico Physics Lab"
+subtitle: "Discovering the laws of nature through Python simulations"
+---
+
+Welcome to **In Silico Physics Lab**—an open, ad-free learning space designed for middle and high school students to explore how physical laws work from the inside out.
+
+Instead of only memorizing formulas, each experiment lets you:
+
+1. **Understand the Law:** Connect physical intuition to the exact mathematical equations.
+2. **See the Algorithm:** Learn how a computer turns a differential law into step-by-step motion.
+3. **Run & Tweak Live Simulations:** Modify parameters and run real Python physics engines right inside your web browser.
+4. **Code Locally:** Download clean, readable Python scripts to experiment on your own computer.
+
+---
+
+### Experiment Catalog
+
+| # | Experiment | Core Physics Law | Computational Method |
+| :- | :--- | :--- | :--- |
+| **01** | [**Leaning Tower of Pisa**](experiments/01-leaning-tower-of-pisa.qmd) | Newton's Second Law ($F_{\text{net}} = ma$) & Air Drag | Euler–Cromer Numerical Integration |

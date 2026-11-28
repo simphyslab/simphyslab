@@ -1,0 +1,566 @@
+---
+title: "Experiment 01: The Leaning Tower of Pisa"
+subtitle: "How Newton's Second Law governs falling objects in a vacuum and in air"
+format: live-html
+pyodide:
+  packages:
+    - numpy
+    - matplotlib
+  resources:
+    - ../physkit
+---
+
+## 1. The Physics Problem & Analytical Laws
+
+Legend holds that around 1589, Galileo Galilei dropped two spheres of different masses from the top of the **Leaning Tower of Pisa** ($H = 56\text{ m}$) to test whether heavier objects fall faster than lighter ones. Nearly four centuries later, in 1971, Apollo 15 astronaut David Scott repeated the experiment on the airless Moon using a **geology hammer** and a **falcon feather**—and both hit the lunar surface at the exact same instant.
+
+Why do a hammer and a feather tie in a vacuum, yet separate dramatically in Earth's atmosphere? The answer lies in **Newton's Second Law of Motion**:
+
+$$F_{\text{net}} = m \cdot a \quad \Longrightarrow \quad a = \frac{F_{\text{net}}}{m}$$
+
+where $F_{\text{net}}$ is the total net force acting on the object (in Newtons, $\text{N}$), $m$ is its mass ($\text{kg}$), and $a$ is its downward acceleration ($\text{m/s}^2$).
+
+### Case A: Free Fall in a Vacuum (Gravity Only)
+
+In a vacuum, the only force pulling the object downward is gravity, $F_g = m g$, where $g \approx 9.81\text{ m/s}^2$ near Earth's surface. Substituting this into Newton's Second Law:
+
+$$a = \frac{F_g}{m} = \frac{m g}{m} = g$$
+
+Notice that **mass $m$ cancels out completely**. Because every object accelerates at the exact same rate $g$, velocity $v(t)$ and distance fallen $d(t)$ follow clean analytical formulas:
+
+$$v(t) = g t \qquad \text{and} \qquad d(t) = \frac{1}{2} g t^2$$
+
+From a $H = 56\text{ m}$ tower, both the hammer and the feather land in:
+
+$$t_{\text{land}} = \sqrt{\frac{2H}{g}} = \sqrt{\frac{2(56)}{9.81}} \approx 3.38\text{ s}$$
+
+### Case B: Falling Through Air (Gravity + Air Resistance)
+
+In Earth's atmosphere, a falling object collides with air molecules, creating an upward **aerodynamic drag force** $F_d$ that grows with the square of its speed:
+
+$$F_d = \frac{1}{2} \rho C_d A v^2$$
+
+* $\rho$: air density ($\approx 1.225\text{ kg/m}^3$ at sea level)
+* $C_d$: dimensionless drag coefficient (shape roughness)
+* $A$: cross-sectional area facing the airflow ($\text{m}^2$)
+
+Applying Newton's Second Law now gives:
+
+$$a(t) = \frac{F_g - F_d}{m} = g - \frac{\rho C_d A}{2m} v(t)^2$$
+
+Here, **mass no longer cancels out**. For a light feather with a broad surface area, $\frac{\rho C_d A}{2m}$ is large—so $F_d$ quickly grows until it equals gravity ($F_d = m g$). At that point, net force and acceleration drop to **zero** ($a = 0$), and the feather stops speeding up, drifting downward at a constant **terminal velocity**:
+
+$$v_t = \sqrt{\frac{2 m g}{\rho C_d A}}$$
+
+---
+
+## 2. The Simulation Method: Euler–Cromer Integration
+
+Because air drag changes continuously as velocity changes, we let the computer simulate the fall in tiny time slices of $\Delta t = 0.01\text{ seconds}$ using the **Euler–Cromer method**:
+
+1. **Calculate forces & acceleration** at the current step $i$:
+   $$a_i = g - \frac{\rho C_d A}{2m} v_i^2$$
+2. **Update velocity** over the tiny time slice $\Delta t$:
+   $$v_{i+1} = v_i + a_i \Delta t$$
+3. **Update altitude** using the newly updated velocity:
+   $$y_{i+1} = y_i - v_{i+1} \Delta t$$
+
+Repeating these steps reconstructs the entire trajectory from the top of the tower ($y = H$) to the ground ($y = 0\text{ m}$).
+
+---
+
+## 3. Interactive Lab Simulation
+
+Use the **sliders or number boxes** below to change the tower height, object masses, or gravity, then click **Play** (or drag the timeline scrubber) to observe the fall in **true 1:1 real-time** (`1 second` on the simulation clock = `1 second` on a real stopwatch).
+
+::: {.sim-controls}
+```{ojs}
+//| echo: false
+function debounce(view, delay = 250) {
+  return Generators.observe(notify => {
+    let timer = null;
+    const onInput = () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => notify(view.value), delay);
+    };
+    view.addEventListener("input", onInput);
+    notify(view.value);
+    return () => view.removeEventListener("input", onInput);
+  });
+}
+
+viewof tower_height_ui = Inputs.range([10, 250], {value: 56, step: 1, label: "Tower Height H (m)"})
+viewof hammer_mass_ui = Inputs.range([0.2, 10.0], {value: 1.5, step: 0.1, label: "Hammer Mass (kg)"})
+viewof feather_mass_ui = Inputs.range([0.001, 0.100], {value: 0.002, step: 0.001, label: "Feather Mass (kg)"})
+viewof gravity_ui = Inputs.select(
+  new Map([
+    ["Earth (9.81 m/s²)", 9.81],
+    ["Moon (1.62 m/s²)", 1.62],
+    ["Mars (3.72 m/s²)", 3.72]
+  ]),
+  {value: 9.81, label: "Gravity g"}
+)
+
+tower_height = debounce(viewof tower_height_ui, 250)
+hammer_mass = debounce(viewof hammer_mass_ui, 250)
+feather_mass = debounce(viewof feather_mass_ui, 250)
+gravity = gravity_ui
+```
+:::
+
+```{pyodide}
+#| echo: false
+#| input:
+#|   - tower_height
+#|   - hammer_mass
+#|   - feather_mass
+#|   - gravity
+import sys
+import json
+import uuid
+sys.path.extend([".", ".."])
+
+import numpy as np
+from IPython.display import HTML
+from physkit.integrators import simulate_vertical_fall
+
+H = float(tower_height)
+G = float(gravity)
+RHO = 1.225
+
+HAM_M, HAM_A, HAM_CD = float(hammer_mass), 0.008, 0.80
+FEA_M, FEA_A, FEA_CD = float(feather_mass), 0.004, 1.20
+DT = 0.01
+
+# Estimate total duration so both objects reach the ground (capped at 120 s)
+v_term_fea = np.sqrt(2.0 * FEA_M * G / (RHO * FEA_CD * FEA_A))
+t_est = np.sqrt(2.0 * H / G) + (H / max(v_term_fea, 0.5)) + 1.0
+T_MAX = float(np.clip(np.ceil(t_est), 5.0, 120.0))
+
+# Run the 4 Euler-Cromer simulations
+ham_vac = simulate_vertical_fall(H, HAM_M, HAM_A, 0.0, RHO, G, DT, T_MAX)
+fea_vac = simulate_vertical_fall(H, FEA_M, FEA_A, 0.0, RHO, G, DT, T_MAX)
+ham_air = simulate_vertical_fall(H, HAM_M, HAM_A, HAM_CD, RHO, G, DT, T_MAX)
+fea_air = simulate_vertical_fall(H, FEA_M, FEA_A, FEA_CD, RHO, G, DT, T_MAX)
+
+def fmt_impact(res):
+    return f"{res['t_impact']:.2f} s (v = {res['v_impact']:.1f} m/s)" if res["t_impact"] else f"> {T_MAX:.0f} s"
+
+print(f"Vacuum Impact -> Hammer: {fmt_impact(ham_vac)} | Feather: {fmt_impact(fea_vac)}")
+print(f"Air Impact    -> Hammer: {fmt_impact(ham_air)} | Feather: {fmt_impact(fea_air)}")
+
+# Downsample to 0.02 s step for compact (~50 KB) JSON transfer to HTML5 Canvas
+stride = 2
+def pack(arr):
+    return np.round(arr[::stride], 4).tolist()
+
+payload = {
+    "H": H,
+    "G": G,
+    "T_MAX": T_MAX,
+    "v_max": float(max(np.max(ham_vac["v"]) * 1.15, 5.0)),
+    "t": pack(ham_vac["t"]),
+    "hv_y": pack(ham_vac["y"]),
+    "fv_y": pack(fea_vac["y"]),
+    "ha_y": pack(ham_air["y"]),
+    "fa_y": pack(fea_air["y"]),
+    "vac_v": pack(ham_vac["v"]),
+    "ha_v": pack(ham_air["v"]),
+    "fa_v": pack(fea_air["v"]),
+    "vac_a": pack(ham_vac["a"]),
+    "ha_a": pack(ham_air["a"]),
+    "fa_a": pack(fea_air["a"]),
+    "vac_d": pack(ham_vac["d"]),
+    "ha_d": pack(ham_air["d"]),
+    "fa_d": pack(fea_air["d"]),
+}
+
+uid = uuid.uuid4().hex[:8]
+data_json = json.dumps(payload)
+
+html_widget = f"""
+<div id="sim-box-{uid}" style="border:1px solid #CBD5E1; border-radius:8px; background:#FFFFFF; padding:12px; margin-top:8px;">
+  <div style="display:flex; flex-wrap:wrap; align-items:center; gap:10px; margin-bottom:10px; padding-bottom:8px; border-bottom:1px solid #E2E8F0;">
+    <button id="btn-play-{uid}" style="background:#0B1F3A; color:#FFF; border:none; border-radius:5px; padding:6px 14px; font-weight:600; cursor:pointer;">Play</button>
+    <button id="btn-reset-{uid}" style="background:#F1F5F9; color:#0B1F3A; border:1px solid #CBD5E1; border-radius:5px; padding:6px 12px; font-weight:600; cursor:pointer;">Reset</button>
+    <input id="scrub-{uid}" type="range" min="0" max="{len(payload['t'])-1}" value="0" style="flex:1; min-width:140px; accent-color:#1C939A; cursor:pointer;">
+    <span id="clock-{uid}" style="font-family:monospace; font-size:13px; font-weight:700; background:#0B1F3A; color:#FFF; padding:4px 10px; border-radius:5px;">
+      t =  0.00 s (1.0× Real-Time)
+    </span>
+  </div>
+  <canvas id="canvas-{uid}" style="width:100%; height:auto; display:block;"></canvas>
+</div>
+
+<script>
+(function() {{
+  const data = {data_json};
+  const canvas = document.getElementById("canvas-{uid}");
+  const btnPlay = document.getElementById("btn-play-{uid}");
+  const btnReset = document.getElementById("btn-reset-{uid}");
+  const scrub = document.getElementById("scrub-{uid}");
+  const clockLabel = document.getElementById("clock-{uid}");
+  if (!canvas) return;
+
+  const W = 960, H_PX = 520;
+  const dpr = window.devicePixelRatio || 1;
+  canvas.width = W * dpr;
+  canvas.height = H_PX * dpr;
+  const ctx = canvas.getContext("2d");
+  ctx.scale(dpr, dpr);
+
+  const NAVY = "#0B1F3A", TEAL = "#1C939A", GOLD = "#D97706", SLATE = "#64748B", BG = "#F8FAFC";
+  const N = data.t.length;
+  let simTime = 0.0;
+  let playing = false;
+  let lastWall = null;
+
+  function drawHammer(x, y, color) {{
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.fillStyle = color;
+    ctx.fillRect(-2.5, -4, 5, 16);   // handle
+    ctx.fillRect(-10, -11, 20, 7);   // head
+    ctx.restore();
+  }}
+
+  function drawFeather(x, y, color) {{
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(-9, 9);
+    ctx.quadraticCurveTo(-8, -4, 9, -9);
+    ctx.quadraticCurveTo(6, 5, -9, 9);
+    ctx.fill();
+    ctx.strokeStyle = "#FFFFFF";
+    ctx.lineWidth = 1.2;
+    ctx.beginPath();
+    ctx.moveTo(-9, 9);
+    ctx.lineTo(7, -7);
+    ctx.stroke();
+    ctx.restore();
+  }}
+
+  function drawSeries(box, tArr, yArr, idx, yMin, yMax, color, dashed) {{
+    ctx.save();
+    ctx.strokeStyle = color;
+    ctx.lineWidth = dashed ? 1.8 : 2.3;
+    ctx.setLineDash(dashed ? [5, 4] : []);
+    ctx.beginPath();
+    for (let i = 0; i <= idx; i++) {{
+      const px = box.x + (tArr[i] / data.T_MAX) * box.w;
+      const py = box.y + box.h - ((yArr[i] - yMin) / (yMax - yMin)) * box.h;
+      if (i === 0) ctx.moveTo(px, py);
+      else ctx.lineTo(px, py);
+    }}
+    ctx.stroke();
+    // Current value dot
+    const cx = box.x + (tArr[idx] / data.T_MAX) * box.w;
+    const cy = box.y + box.h - ((yArr[idx] - yMin) / (yMax - yMin)) * box.h;
+    ctx.setLineDash([]);
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+  }}
+
+  function renderFrame(idx) {{
+    ctx.clearRect(0, 0, W, H_PX);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(0, 0, W, H_PX);
+
+    // --- LEFT PANEL: TOWER DROP ARENA ---
+    const arena = {{ x: 64, y: 42, w: 320, h: 420 }};
+    ctx.fillStyle = BG;
+    ctx.fillRect(arena.x, arena.y, arena.w, arena.h);
+    ctx.strokeStyle = "#CBD5E1";
+    ctx.lineWidth = 1;
+    ctx.strokeRect(arena.x, arena.y, arena.w, arena.h);
+
+    // Center divider & ground
+    ctx.beginPath();
+    ctx.moveTo(arena.x + arena.w / 2, arena.y);
+    ctx.lineTo(arena.x + arena.w / 2, arena.y + arena.h);
+    ctx.stroke();
+
+    ctx.fillStyle = NAVY;
+    ctx.font = "bold 13px sans-serif";
+    ctx.textAlign = "center";
+    ctx.fillText(`Tower Drop Arena (${{data.H.toFixed(0)}} m)`, arena.x + arena.w / 2, 24);
+    ctx.font = "bold 11px sans-serif";
+    ctx.fillText("VACUUM (No Air)", arena.x + arena.w * 0.25, arena.y + arena.h + 20);
+    ctx.fillText("ATMOSPHERE (Drag)", arena.x + arena.w * 0.75, arena.y + arena.h + 20);
+
+    // Altitude ticks
+    ctx.font = "11px sans-serif";
+    ctx.fillStyle = SLATE;
+    ctx.textAlign = "right";
+    for (let k = 0; k <= 4; k++) {{
+      const frac = k / 4;
+      const py = arena.y + arena.h - frac * (arena.h - 24);
+      ctx.strokeStyle = "#E2E8F0";
+      ctx.beginPath();
+      ctx.moveTo(arena.x, py);
+      ctx.lineTo(arena.x + arena.w, py);
+      ctx.stroke();
+      ctx.fillText(`${{(frac * data.H).toFixed(0)}} m`, arena.x - 8, py + 4);
+    }}
+
+    // Ground bar
+    ctx.fillStyle = NAVY;
+    ctx.fillRect(arena.x, arena.y + arena.h - 3, arena.w, 4);
+
+    const mapY = (yVal) => arena.y + arena.h - 10 - (yVal / data.H) * (arena.h - 34);
+    drawHammer(arena.x + arena.w * 0.16, mapY(data.hv_y[idx]), NAVY);
+    drawFeather(arena.x + arena.w * 0.34, mapY(data.fv_y[idx]), TEAL);
+    drawHammer(arena.x + arena.w * 0.66, mapY(data.ha_y[idx]), NAVY);
+    drawFeather(arena.x + arena.w * 0.84, mapY(data.fa_y[idx]), GOLD);
+
+    // Legend strip inside arena top
+    ctx.font = "11px sans-serif";
+    ctx.textAlign = "left";
+    ctx.fillStyle = NAVY; ctx.fillText("■ Hammer", arena.x + 12, arena.y + 16);
+    ctx.fillStyle = TEAL; ctx.fillText("▲ Feather (Vac)", arena.x + 88, arena.y + 16);
+    ctx.fillStyle = GOLD; ctx.fillText("▲ Feather (Air)", arena.x + 195, arena.y + 16);
+
+    // --- RIGHT COLUMN: 3 KINEMATICS PANELS ---
+    const panels = [
+      {{ title: "Kinematics vs. Time — Speed v (m/s)", yMin: 0, yMax: data.v_max, series: [data.vac_v, data.ha_v, data.fa_v], y: 42 }},
+      {{ title: "Acceleration a (m/s²)", yMin: 0, yMax: data.G * 1.18, series: [data.vac_a, data.ha_a, data.fa_a], y: 196 }},
+      {{ title: "Distance Fallen d (m)", yMin: 0, yMax: data.H * 1.08, series: [data.vac_d, data.ha_d, data.fa_d], y: 350 }},
+    ];
+
+    panels.forEach((p, pIdx) => {{
+      const box = {{ x: 465, y: p.y, w: 465, h: 112 }};
+      ctx.fillStyle = BG;
+      ctx.fillRect(box.x, box.y, box.w, box.h);
+      ctx.strokeStyle = "#CBD5E1";
+      ctx.lineWidth = 1;
+      ctx.strokeRect(box.x, box.y, box.w, box.h);
+
+      ctx.fillStyle = NAVY;
+      ctx.font = "bold 12px sans-serif";
+      ctx.textAlign = "left";
+      ctx.fillText(p.title, box.x, box.y - 7);
+
+      // Y-axis min/max labels
+      ctx.fillStyle = SLATE;
+      ctx.font = "10.5px sans-serif";
+      ctx.textAlign = "right";
+      ctx.fillText(p.yMax.toFixed(1), box.x - 6, box.y + 10);
+      ctx.fillText("0.0", box.x - 6, box.y + box.h);
+
+      drawSeries(box, data.t, p.series[0], idx, p.yMin, p.yMax, NAVY, true);
+      drawSeries(box, data.t, p.series[1], idx, p.yMin, p.yMax, NAVY, false);
+      drawSeries(box, data.t, p.series[2], idx, p.yMin, p.yMax, GOLD, false);
+
+      if (pIdx === 0) {{
+        ctx.font = "10.5px sans-serif";
+        ctx.textAlign = "right";
+        ctx.fillStyle = NAVY; ctx.fillText("-- Vacuum (Both)   — Hammer (Air)", box.x + box.w - 8, box.y + 15);
+        ctx.fillStyle = GOLD; ctx.fillText("— Feather (Air)", box.x + box.w - 8, box.y + 30);
+      }}
+      if (pIdx === 2) {{
+        ctx.fillStyle = NAVY;
+        ctx.font = "bold 11.5px sans-serif";
+        ctx.textAlign = "center";
+        ctx.fillText(`Time t (0 to ${{data.T_MAX.toFixed(0)}} s)`, box.x + box.w / 2, box.y + box.h + 22);
+      }}
+    }});
+
+    clockLabel.textContent = `t = ${{data.t[idx].toFixed(2).padStart(5, " ")}} s (1.0× Real-Time)`;
+    scrub.value = idx;
+  }}
+
+  function tick(now) {{
+    if (!playing) return;
+    if (lastWall !== null) {{
+      simTime += (now - lastWall) / 1000.0;
+    }}
+    lastWall = now;
+
+    if (simTime >= data.T_MAX) {{
+      simTime = data.T_MAX;
+      renderFrame(N - 1);
+      playing = false;
+      btnPlay.textContent = "Play";
+      lastWall = null;
+      return;
+    }}
+
+    const idx = Math.min(N - 1, Math.round((simTime / data.T_MAX) * (N - 1)));
+    renderFrame(idx);
+    requestAnimationFrame(tick);
+  }}
+
+  btnPlay.addEventListener("click", () => {{
+    if (playing) {{
+      playing = false;
+      btnPlay.textContent = "Play";
+      lastWall = null;
+    }} else {{
+      if (simTime >= data.T_MAX) simTime = 0.0;
+      playing = true;
+      btnPlay.textContent = "Pause";
+      lastWall = null;
+      requestAnimationFrame(tick);
+    }}
+  }});
+
+  btnReset.addEventListener("click", () => {{
+    playing = false;
+    btnPlay.textContent = "Play";
+    lastWall = null;
+    simTime = 0.0;
+    renderFrame(0);
+  }});
+
+  scrub.addEventListener("input", () => {{
+    playing = false;
+    btnPlay.textContent = "Play";
+    lastWall = null;
+    const idx = parseInt(scrub.value, 10);
+    simTime = data.t[idx];
+    renderFrame(idx);
+  }});
+
+  renderFrame(0);
+}})();
+</script>
+"""
+
+HTML(html_widget)
+```
+---
+
+## 4. Python Source Code (Run on Your Own Computer)
+
+Below is the **exact, self-contained Python script** available for download. You can copy it directly or download the file to run and modify it in VS Code, PyCharm, or IDLE (requires only `numpy` and `matplotlib`):
+
+* [**Download `01_leaning_tower_of_pisa.py`**](../downloads/01_leaning_tower_of_pisa.py)
+
+```python
+"""
+In Silico Physics Lab — Experiment 01: The Leaning Tower of Pisa
+Self-contained 1:1 real-time simulation of a falling hammer and feather.
+
+Requirements:
+    pip install numpy matplotlib
+"""
+
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib.animation import FuncAnimation
+
+# 1. Physical Constants & Object Properties (Edit these to experiment!)
+TOWER_HEIGHT = 56.0      # m
+GRAVITY = 9.81           # m/s^2 (Earth: 9.81, Moon: 1.62, Mars: 3.72)
+AIR_DENSITY = 1.225      # kg/m^3
+
+HAMMER = {"mass": 1.50, "area": 0.008, "cd": 0.80}
+FEATHER = {"mass": 0.002, "area": 0.004, "cd": 1.20}
+
+DT = 0.01                # Numerical time step (s)
+FPS = 20                 # Playback frame rate (20 FPS = 50 ms per frame)
+
+# Automatically estimate enough simulation time for the feather to land
+v_term_feather = np.sqrt(
+    2.0 * FEATHER["mass"] * GRAVITY / (AIR_DENSITY * FEATHER["cd"] * FEATHER["area"])
+)
+T_MAX = float(
+    np.ceil(np.sqrt(2.0 * TOWER_HEIGHT / GRAVITY) + (TOWER_HEIGHT / v_term_feather) + 1.0)
+)
+
+
+def simulate_fall(mass: float, area: float, cd: float, rho: float) -> dict:
+    """Integrate Newton's 2nd Law (F_net = m*g - F_drag) via Euler-Cromer."""
+    steps = int(np.ceil(T_MAX / DT)) + 1
+    t = np.linspace(0.0, (steps - 1) * DT, steps)
+    y = np.zeros(steps)
+    v = np.zeros(steps)
+    a = np.zeros(steps)
+
+    y[0] = TOWER_HEIGHT
+    a[0] = GRAVITY
+    drag_k = 0.5 * rho * cd * area / mass
+
+    for i in range(steps - 1):
+        if y[i] <= 0.0:
+            y[i + 1], v[i + 1], a[i + 1] = 0.0, 0.0, 0.0
+            continue
+
+        a_curr = GRAVITY - drag_k * (v[i] ** 2)
+        a[i] = a_curr
+        v_next = v[i] + a_curr * DT
+        y_next = y[i] - v_next * DT
+
+        if y_next <= 0.0:
+            y[i + 1], v[i + 1], a[i + 1] = 0.0, 0.0, 0.0
+        else:
+            y[i + 1] = y_next
+            v[i + 1] = v_next
+
+    return {"t": t, "y": y, "d": TOWER_HEIGHT - y, "v": v, "a": a}
+
+
+if __name__ == "__main__":
+    ham_vac = simulate_fall(HAMMER["mass"], HAMMER["area"], 0.0, 0.0)
+    fea_vac = simulate_fall(FEATHER["mass"], FEATHER["area"], 0.0, 0.0)
+    ham_air = simulate_fall(HAMMER["mass"], HAMMER["area"], HAMMER["cd"], AIR_DENSITY)
+    fea_air = simulate_fall(FEATHER["mass"], FEATHER["area"], FEATHER["cd"], AIR_DENSITY)
+
+    fig, (ax_drop, ax_vel) = plt.subplots(1, 2, figsize=(10, 5))
+    ax_drop.set_xlim(0, 4)
+    ax_drop.set_ylim(0, TOWER_HEIGHT * 1.14)
+    ax_drop.axvline(2.0, color="gray", linestyle="--")
+    ax_drop.set_xticks([1.0, 3.0])
+    ax_drop.set_xticklabels(["Vacuum", "Atmosphere"])
+    ax_drop.set_ylabel("Altitude (m)")
+    ax_drop.set_title(f"Leaning Tower of Pisa Drop ({TOWER_HEIGHT:.0f} m)")
+
+    p_hv, = ax_drop.plot([0.7], [TOWER_HEIGHT], "s", markersize=11, color="#0B1F3A", label="Hammer")
+    p_fv, = ax_drop.plot([1.3], [TOWER_HEIGHT], "^", markersize=11, color="#1C939A", label="Feather (Vacuum)")
+    p_ha, = ax_drop.plot([2.7], [TOWER_HEIGHT], "s", markersize=11, color="#0B1F3A")
+    p_fa, = ax_drop.plot([3.3], [TOWER_HEIGHT], "^", markersize=11, color="#D97706", label="Feather (Air)")
+    time_badge = ax_drop.text(
+        2.0, TOWER_HEIGHT * 1.06, "t =  0.00 s (1.0× Real-Time)",
+        ha="center", va="center", fontsize=9.5, fontweight="bold", color="white",
+        bbox=dict(boxstyle="round,pad=0.3", facecolor="#0B1F3A", edgecolor="none"),
+    )
+    ax_drop.legend(loc="lower center")
+
+    t = ham_vac["t"]
+    ax_vel.set_xlim(0, T_MAX)
+    ax_vel.set_ylim(0, np.max(ham_vac["v"]) * 1.15)
+    ax_vel.set_xlabel("Time (s)")
+    ax_vel.set_ylabel("Downward Speed (m/s)")
+    ax_vel.set_title("Velocity vs. Time")
+    ax_vel.grid(True, linestyle="--", alpha=0.5)
+
+    l_vac, = ax_vel.plot([], [], "--", color="#0B1F3A", label="Vacuum (Both)")
+    l_ha, = ax_vel.plot([], [], "-", color="#0B1F3A", label="Hammer (Air)")
+    l_fa, = ax_vel.plot([], [], "-", color="#D97706", label="Feather (Air)")
+    ax_vel.legend()
+
+    fig.tight_layout()
+
+    # Lock frame stride and interval to 1:1 real-time (20 FPS -> 50 ms per 0.05 s step)
+    step_stride = max(1, int(round(1.0 / (FPS * DT))))
+    interval_ms = int(round(step_stride * DT * 1000))
+    frames = np.arange(0, len(t), step_stride)
+
+    def animate(idx):
+        p_hv.set_data([0.7], [ham_vac["y"][idx]])
+        p_fv.set_data([1.3], [fea_vac["y"][idx]])
+        p_ha.set_data([2.7], [ham_air["y"][idx]])
+        p_fa.set_data([3.3], [fea_air["y"][idx]])
+        time_badge.set_text(f"t = {t[idx]:5.2f} s (1.0× Real-Time)")
+        l_vac.set_data(t[: idx + 1], ham_vac["v"][: idx + 1])
+        l_ha.set_data(t[: idx + 1], ham_air["v"][: idx + 1])
+        l_fa.set_data(t[: idx + 1], fea_air["v"][: idx + 1])
+        return p_hv, p_fv, p_ha, p_fa, time_badge, l_vac, l_ha, l_fa
+
+    ani = FuncAnimation(fig, animate, frames=frames, interval=interval_ms, blit=False)
+    plt.show()
+```
